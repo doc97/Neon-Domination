@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private Quaternion spawnRotation;
 
     private StrafeMovement strafeScheme;
+    private RotationalMovement rotateScheme;
     private MovementSettings movementSettings;
     private MovementScheme MovementScheme {
         get
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour
             {
                 case MovementType.Strafe:
                     return strafeScheme;
+                case MovementType.Rotational:
+                    return rotateScheme;
                 default:
                     return null;
             }
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private void Awake() {
         movementSettings = new MovementSettings().SetSpeed(speed);
         strafeScheme = new StrafeMovement(movementSettings);
+        rotateScheme = new RotationalMovement(movementSettings);
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
     }
