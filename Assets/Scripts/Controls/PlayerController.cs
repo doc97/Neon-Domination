@@ -2,38 +2,49 @@
 
 public class PlayerController : MonoBehaviour
 {
+    public enum MovementType
+    {
+        Strafe, Rotational
+    }
+
     private const int RESPAWN_Y_THRESHOLD = -80;
 
     #region Fields
     [SerializeField, Tooltip("Units per second")]
     private float speed;
+    [SerializeField]
+    private MovementType movementType = MovementType.Strafe;
 
     private Vector3 spawnPosition;
     private Quaternion spawnRotation;
+
+    private StrafeMovement strafeScheme;
+    private MovementSettings movementSettings;
+    private MovementScheme MovementScheme {
+        get
+        {
+            switch (movementType)
+            {
+                case MovementType.Strafe:
+                    return strafeScheme;
+                default:
+                    return null;
+            }
+        }
+    }
     #endregion
 
     private void Awake() {
+        movementSettings = new MovementSettings().SetSpeed(speed);
+        strafeScheme = new StrafeMovement(movementSettings);
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
     }
 
     private void Update()
     {
-        UpdateMovement();
+        MovementScheme?.Update(transform);
         CheckRestart();
-    }
-
-    private void UpdateMovement() {
-        float dx = Input.GetAxis("Horizontal");
-        float dz = Input.GetAxis("Vertical");
-        
-        Vector3 movement = new Vector3(dx, 0, dz).normalized * speed * Time.deltaTime;
-        transform.position += movement;
-
-        if (movement.sqrMagnitude > 0)
-        {
-            transform.rotation = Quaternion.LookRotation(movement);
-        }
     }
 
     private void CheckRestart()
