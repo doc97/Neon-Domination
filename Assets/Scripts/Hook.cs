@@ -41,9 +41,8 @@ public class Hook : MonoBehaviour
         {
             FixedJoint joint = gameObject.AddComponent<FixedJoint>();
             joint.connectedBody = col.rigidbody;
-            // TODO: Handle DummyPlayer properly
-            hooked = col.gameObject.GetComponent<PlayerController>()?.Player;
-            hooked?.State.On(Player.States.Hooked);
+            hooked = col.gameObject.GetComponent<PlayerController>().Player;
+            hooked.State.On(Player.States.Hooked);
             reverse = true;
         }
         else
@@ -60,7 +59,7 @@ public class Hook : MonoBehaviour
 
     private bool IsTarget(GameObject gameObject)
     {
-        return gameObject != origin.gameObject && (gameObject.GetComponent<PlayerController>() != null || gameObject.GetComponent<DummyPlayer>() != null);
+        return gameObject != origin.gameObject &&gameObject.GetComponent<PlayerController>() != null;
     }
 
     public void SetOrigin(Transform origin)
