@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Assertions;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private float speed;
     [SerializeField]
     private MovementType movementType = MovementType.Strafe;
+    [SerializeField, Tooltip("World prefab storage")]
+    private GameObject prefabs;
     #endregion
 
     private Vector3 spawnPosition;
@@ -45,15 +47,24 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     private void Awake() {
+        Assert.IsNotNull(prefabs, "No prefab game object given!");
         movementSettings = new MovementSettings().SetSpeed(speed);
         strafeScheme = new StrafeMovement(movementSettings);
         rotateScheme = new RotationalMovement(movementSettings);
-        abilities = new Ability[] {
-            new HookAbility(),
-        };
+        abilities = new Ability[0];
 
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
+    }
+
+    private void Start()
+    {
+        GameObject hookPrefab = prefabs.transform.Find("Hook")?.gameObject;
+        Assert.IsNotNull(hookPrefab, "No Hook prefab exists!");
+
+        abilities = new Ability[] {
+            new HookAbility(gameObject, hookPrefab),
+        };
     }
 
     private void Update()
