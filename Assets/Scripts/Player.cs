@@ -9,6 +9,7 @@ public class Player
 
     #region Fields
     public EnumBitField<States> State { get; } = new EnumBitField<States>();
+    public Vector3 AimDirection { get; set; } = new Vector3(0, 0, 1);
     private Ability[] abilities;
     #endregion
 

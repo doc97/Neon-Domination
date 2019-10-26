@@ -24,7 +24,9 @@ public class PlayerController : MonoBehaviour
     
     [Header("Other")]
     [SerializeField, Tooltip("Units per second")]
-    private float speed;
+    private float maxSpeed;
+    [SerializeField]
+    private float acceleration;
     [SerializeField]
     private MovementType movementType = MovementType.Strafe;
     [SerializeField, Tooltip("World prefab storage")]
@@ -60,13 +62,15 @@ public class PlayerController : MonoBehaviour
 
     private void Awake() {
         Assert.IsNotNull(prefabs, "No prefab game object given!");
-        movementSettings = new MovementSettings().SetSpeed(speed);
+        movementSettings = new MovementSettings()
+                        .SetMaxSpeed(maxSpeed)
+                        .SetAcceleration(acceleration);
         bindings = new InputBindings()
                         .SetHorizontal(horizontalBinding)
                         .SetVertical(verticalBinding)
                         .SetHook(hookBinding)
                         .SetDash(dashBinding);
-        strafeScheme = new StrafeMovement(movementSettings, bindings);
+        strafeScheme = new StrafeMovement(Player, movementSettings, bindings);
         rotateScheme = new RotationalMovement(movementSettings, bindings);
 
         spawnPosition = transform.position;
@@ -85,7 +89,8 @@ public class PlayerController : MonoBehaviour
     {
         CheckFalling();
         CheckRestart();
-        UpdateMovement();
+        UpdateAim();
+        MovementScheme?.Update(transform);
         Player.Update(Time.deltaTime);
     }
 
@@ -97,7 +102,11 @@ public class PlayerController : MonoBehaviour
             Logger.Logf("Dash collision!");
             Rigidbody body = GetComponent<Rigidbody>();
             DashAbility dash = Player.GetAbility<DashAbility>();
-            col.gameObject.GetComponent<Rigidbody>().AddForce(body.velocity.normalized * dash.Force / 2, ForceMode.Impulse);
+
+            float pushRatio = Mathf.Min(body.velocity.sqrMagnitude / movementSettings.MaxSpeedSqrd, 1) * 0.66f;
+            Vector3 force = body.velocity.normalized * pushRatio * dash.Force;
+            col.gameObject.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+
             body.velocity = Vector3.zero;
             Player.State.Off(Player.States.Dashing);
         }
@@ -131,11 +140,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void UpdateMovement()
+    private void UpdateAim()
     {
-        if (Player.State.Value == 0)
+        float dx = NDInput.GetAxis(bindings.Horizontal);
+        float dz = NDInput.GetAxis(bindings.Vertical);
+        Vector3 dir = new Vector3(dx, 0, dz).normalized;
+
+        if (dir.sqrMagnitude > 0)
         {
-            MovementScheme?.Update(transform);
+            Player.AimDirection = dir;
         }
     }
 }

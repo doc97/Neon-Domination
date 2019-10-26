@@ -14,7 +14,7 @@ public class RotationalMovement : MovementScheme
         Quaternion rot = Quaternion.Euler(0, dx * TURN_SPEED * Time.deltaTime, 0);
         t.GetComponent<Rigidbody>().MoveRotation(t.rotation * rot);
 
-        Vector3 movement = t.forward * dz * settings.Speed * Time.deltaTime;
+        Vector3 movement = t.forward * dz * settings.MaxSpeed * Time.deltaTime;
         t.GetComponent<Rigidbody>().MovePosition(t.position + movement);
     }
 }

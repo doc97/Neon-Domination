@@ -5,7 +5,7 @@ public class DashAbility : Ability
     private const float COOLDOWN = 4; // seconds
 
     #region Fields
-    public float Force { get; } = 20;
+    public float Force { get; } = 15;
     private Player player;
     private GameObject playerObj;
     private MovementSettings movementSettings;
@@ -24,14 +24,15 @@ public class DashAbility : Ability
 
         // Deactivate dashing status when no longer moving fast
         Vector3 velocity = playerObj.GetComponent<Rigidbody>().velocity;
-        if (velocity.sqrMagnitude <= movementSettings.Speed * movementSettings.Speed)
+        if (velocity.sqrMagnitude <= movementSettings.MaxSpeedSqrd)
            player.State.Off(Player.States.Dashing);
     }
 
     protected override void ActivateImpl()
     {
         Logger.Logf("Ability ({0}): activated", Name);
-        playerObj.GetComponent<Rigidbody>().AddForce(playerObj.transform.forward * Force, ForceMode.Impulse);
+        playerObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        playerObj.GetComponent<Rigidbody>().AddForce(player.AimDirection * Force, ForceMode.Impulse);
         player.State.On(Player.States.Dashing);
     }
 
