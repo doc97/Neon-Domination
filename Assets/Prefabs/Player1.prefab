@@ -82,5 +82,10 @@ PrefabInstance:
       propertyPath: hookBinding
       value: Hook1
       objectReference: {fileID: 0}
+    - target: {fileID: 8666294830442041694, guid: 217e32e711b487245b5cf9b6a5700cfa,
+        type: 3}
+      propertyPath: dashBinding
+      value: Dash1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 217e32e711b487245b5cf9b6a5700cfa, type: 3}

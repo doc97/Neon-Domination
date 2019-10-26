@@ -5,28 +5,30 @@ public class HookAbility : Ability
     private const float COOLDOWN = 5; // seconds
 
     #region Fields
-    private GameObject player;
-    private GameObject hook;
+    private Player player;
+    private GameObject playerObj;
+    private GameObject hookObj;
     #endregion
 
-    public HookAbility(GameObject player, GameObject hook, string inputName) : base("Hook", COOLDOWN, inputName)
+    public HookAbility(Player player, GameObject playerObj, GameObject hookObj, string inputName) : base("Hook", COOLDOWN, inputName)
     {
         this.player = player;
-        this.hook = hook;
+        this.playerObj = playerObj;
+        this.hookObj = hookObj;
     }
 
     protected override void ActivateImpl()
     {
         Logger.Logf("Ability ({0}): activated", Name);
-        Quaternion rot = player.transform.rotation * hook.transform.localRotation;
-        Vector3 pos = player.transform.position + hook.transform.localPosition + player.transform.forward * 2;
-        GameObject instance = GameObject.Instantiate(hook, pos, rot, GameObject.Find("_Dynamic").transform);
-        instance.GetComponent<Hook>().SetOrigin(player.transform);
+        Quaternion rot = playerObj.transform.rotation * hookObj.transform.localRotation;
+        Vector3 pos = playerObj.transform.position + hookObj.transform.localPosition + playerObj.transform.forward * 2;
+        GameObject instance = GameObject.Instantiate(hookObj, pos, rot, GameObject.Find("_Dynamic").transform);
+        instance.GetComponent<Hook>().SetOrigin(playerObj.transform);
         instance.SetActive(true);
     }
 
     protected override bool CanActivateImpl()
     {
-        return true;
+        return player.State.Value == 0;
     }
 }

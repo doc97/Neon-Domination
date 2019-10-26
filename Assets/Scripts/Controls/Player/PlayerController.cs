@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private string verticalBinding;
     [SerializeField]
     private string hookBinding;
+    [SerializeField]
+    private string dashBinding;
     
     [Header("Other")]
     [SerializeField, Tooltip("Units per second")]
@@ -61,7 +63,8 @@ public class PlayerController : MonoBehaviour
         bindings = new InputBindings()
                         .SetHorizontal(horizontalBinding)
                         .SetVertical(verticalBinding)
-                        .SetHook(hookBinding);
+                        .SetHook(hookBinding)
+                        .SetDash(dashBinding);
         strafeScheme = new StrafeMovement(settings, bindings);
         rotateScheme = new RotationalMovement(settings, bindings);
 

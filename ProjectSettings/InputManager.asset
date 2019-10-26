@@ -54,6 +54,22 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
+    m_Name: Dash1
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: q
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 3
+    dead: 0.001
+    sensitivity: 3
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
     m_Name: Horizontal2
     descriptiveName: 
     descriptiveNegativeName: 
@@ -91,6 +107,22 @@ InputManager:
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: o
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 3
+    dead: 0.001
+    sensitivity: 3
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Dash2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: u
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3

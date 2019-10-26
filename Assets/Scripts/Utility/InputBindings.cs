@@ -5,15 +5,8 @@ public class InputBindings
     public string Horizontal { get; private set; }
     public string Vertical { get; private set; }
     public string Hook { get; private set; }
+    public string Dash { get; private set; }
     #endregion
-
-    public InputBindings Set(string horizontal, string vertical, string hook)
-    {
-        Horizontal = horizontal;
-        Vertical = vertical;
-        Hook = hook;
-        return this;
-    }
 
     public InputBindings SetHorizontal(string horizontal)
     {
@@ -30,6 +23,12 @@ public class InputBindings
     public InputBindings SetHook(string hook)
     {
         Hook = hook;
+        return this;
+    }
+
+    public InputBindings SetDash(string dash)
+    {
+        Dash = dash;
         return this;
     }
 }

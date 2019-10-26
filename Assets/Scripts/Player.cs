@@ -15,7 +15,8 @@ public class Player
     public void InitializeAbilities(GameObject player, GameObject hookPrefab, InputBindings bindings)
     {
         abilities = new Ability[] {
-            new HookAbility(player, hookPrefab, bindings.Hook),
+            new HookAbility(this, player, hookPrefab, bindings.Hook),
+            new DashAbility(this, player, bindings.Dash)
         };
     }
 
