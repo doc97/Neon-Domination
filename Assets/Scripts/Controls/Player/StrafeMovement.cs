@@ -10,11 +10,11 @@ public class StrafeMovement : MovementScheme
         float dz = Input.GetAxis("Vertical");
         
         Vector3 movement = new Vector3(dx, 0, dz).normalized * settings.Speed * Time.deltaTime;
-        t.position += movement;
+        t.GetComponent<Rigidbody>().MovePosition(t.position + movement);
 
         if (movement.sqrMagnitude > 0)
         {
-            t.rotation = Quaternion.LookRotation(movement);
+            t.GetComponent<Rigidbody>().MoveRotation(Quaternion.LookRotation(movement));
         }
     }
 }
