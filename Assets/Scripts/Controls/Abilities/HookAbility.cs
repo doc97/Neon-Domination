@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HookAbility : Ability
 {
-    private const float COOLDOWN = 0; // seconds
+    private const float COOLDOWN = 5; // seconds
 
     #region Fields
     private GameObject player;
