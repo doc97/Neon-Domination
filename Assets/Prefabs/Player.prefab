@@ -123,6 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ba4aefa40b17c4fa381a646acf8018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalBinding: 
+  verticalBinding: 
+  hookBinding: 
   speed: 7
   movementType: 0
   prefabs: {fileID: 0}

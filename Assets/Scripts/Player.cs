@@ -12,10 +12,10 @@ public class Player
     private Ability[] abilities;
     #endregion
 
-    public void InitializeAbilities(GameObject player, GameObject hookPrefab)
+    public void InitializeAbilities(GameObject player, GameObject hookPrefab, InputBindings bindings)
     {
         abilities = new Ability[] {
-            new HookAbility(player, hookPrefab),
+            new HookAbility(player, hookPrefab, bindings.Hook),
         };
     }
 
@@ -29,8 +29,7 @@ public class Player
         foreach (Ability ability in abilities)
         {
             ability.Update(deltaTime);
-
-            if (Input.GetButtonDown(ability.InputName))
+            if (NDInput.GetButtonDown(ability.InputName))
             {
                 if (ability.IsOnCooldown())
                 {

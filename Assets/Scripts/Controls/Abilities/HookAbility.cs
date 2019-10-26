@@ -9,7 +9,7 @@ public class HookAbility : Ability
     private GameObject hook;
     #endregion
 
-    public HookAbility(GameObject player, GameObject hook) : base("Hook", COOLDOWN, "Hook")
+    public HookAbility(GameObject player, GameObject hook, string inputName) : base("Hook", COOLDOWN, inputName)
     {
         this.player = player;
         this.hook = hook;

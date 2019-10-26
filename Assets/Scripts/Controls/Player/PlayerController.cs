@@ -12,6 +12,15 @@ public class PlayerController : MonoBehaviour
 
     #region Fields
     #region Serialized
+    [Header("Controls")]
+    [SerializeField]
+    private string horizontalBinding;
+    [SerializeField]
+    private string verticalBinding;
+    [SerializeField]
+    private string hookBinding;
+    
+    [Header("Other")]
     [SerializeField, Tooltip("Units per second")]
     private float speed;
     [SerializeField]
@@ -26,7 +35,6 @@ public class PlayerController : MonoBehaviour
     #region Movement
     private StrafeMovement strafeScheme;
     private RotationalMovement rotateScheme;
-    private MovementSettings movementSettings;
     private MovementScheme MovementScheme {
         get
         {
@@ -43,14 +51,19 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    private InputBindings bindings;
     public Player Player { get; } = new Player();
     #endregion
 
     private void Awake() {
         Assert.IsNotNull(prefabs, "No prefab game object given!");
-        movementSettings = new MovementSettings().SetSpeed(speed);
-        strafeScheme = new StrafeMovement(movementSettings);
-        rotateScheme = new RotationalMovement(movementSettings);
+        MovementSettings settings = new MovementSettings().SetSpeed(speed);
+        bindings = new InputBindings()
+                        .SetHorizontal(horizontalBinding)
+                        .SetVertical(verticalBinding)
+                        .SetHook(hookBinding);
+        strafeScheme = new StrafeMovement(settings, bindings);
+        rotateScheme = new RotationalMovement(settings, bindings);
 
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
@@ -61,7 +74,7 @@ public class PlayerController : MonoBehaviour
         GameObject hookPrefab = prefabs.transform.Find("Hook")?.gameObject;
         Assert.IsNotNull(hookPrefab, "No Hook prefab exists!");
 
-        Player.InitializeAbilities(gameObject, hookPrefab);
+        Player.InitializeAbilities(gameObject, hookPrefab, bindings);
     }
 
     private void Update()
