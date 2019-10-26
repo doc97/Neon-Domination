@@ -82,16 +82,15 @@ public class PlayerController : MonoBehaviour
         GameObject hookPrefab = prefabs.transform.Find("Hook")?.gameObject;
         Assert.IsNotNull(hookPrefab, "No Hook prefab exists!");
 
-        Player.InitializeAbilities(gameObject, hookPrefab, bindings, movementSettings);
+        Player.Initialize(gameObject, hookPrefab, bindings, movementSettings);
     }
 
     private void Update()
     {
         CheckFalling();
         CheckRestart();
-        UpdateAim();
-        MovementScheme?.Update(transform);
         Player.Update(Time.deltaTime);
+        MovementScheme?.Update(transform);
     }
 
     private void OnCollisionEnter(Collision col)
@@ -99,13 +98,21 @@ public class PlayerController : MonoBehaviour
         bool isPlayer = col.gameObject.GetComponent<PlayerController>() != null;
         if (Player.State.IsOn(Player.States.Dashing) && isPlayer)
         {
-            Logger.Logf("Dash collision!");
             Rigidbody body = GetComponent<Rigidbody>();
             DashAbility dash = Player.GetAbility<DashAbility>();
+            Rigidbody otherBody = col.gameObject.GetComponent<Rigidbody>();
+            Player otherPlayer = col.gameObject.GetComponent<PlayerController>().Player;
 
-            float pushRatio = Mathf.Min(body.velocity.sqrMagnitude / movementSettings.MaxSpeedSqrd, 1) * 0.66f;
-            Vector3 force = body.velocity.normalized * pushRatio * dash.Force;
-            col.gameObject.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+            otherPlayer.State.On(Player.States.Pushed);
+            G.Instance.Pipeline.New().
+                Func(() => {
+                    Vector3 force = otherBody.velocity.normalized * 0.5f * dash.Force;
+                    otherBody.AddForce(force, ForceMode.Impulse);
+                })
+                .Delay(0.8f)
+                .Func(() => {
+                    otherPlayer.State.Off(Player.States.Pushed);
+                });
 
             body.velocity = Vector3.zero;
             Player.State.Off(Player.States.Dashing);
@@ -137,18 +144,6 @@ public class PlayerController : MonoBehaviour
             body.angularVelocity = Vector3.zero;
             transform.rotation = spawnRotation;
             transform.position = spawnPosition;
-        }
-    }
-
-    private void UpdateAim()
-    {
-        float dx = NDInput.GetAxis(bindings.Horizontal);
-        float dz = NDInput.GetAxis(bindings.Vertical);
-        Vector3 dir = new Vector3(dx, 0, dz).normalized;
-
-        if (dir.sqrMagnitude > 0)
-        {
-            Player.AimDirection = dir;
         }
     }
 }

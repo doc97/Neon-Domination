@@ -32,11 +32,7 @@ public class StrafeMovement : MovementScheme
 
     private void UpdateRotation(Rigidbody body)
     {
-        // body.angularVelocity = Vector3.zero;
-        // if (!MathUtil.EqualsFloat(body.velocity.sqrMagnitude, 0, 0.1f))
-        // {
-            body.MoveRotation(Quaternion.LookRotation(player.AimDirection));
-        // }
+        body.MoveRotation(Quaternion.LookRotation(player.AimDirection));
     }
 
     private bool CanMove()

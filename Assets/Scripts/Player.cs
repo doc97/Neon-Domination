@@ -4,17 +4,19 @@ public class Player
 {
     public enum States
     {
-        Dashing, Falling, Hooked, Stunned
+        Dashing, Falling, Hooked, Pushed, Stunned
     }
 
     #region Fields
     public EnumBitField<States> State { get; } = new EnumBitField<States>();
-    public Vector3 AimDirection { get; set; } = new Vector3(0, 0, 1);
+    public Vector3 AimDirection { get; private set; } = new Vector3(0, 0, 1);
     private Ability[] abilities;
+    private InputBindings bindings;
     #endregion
 
-    public void InitializeAbilities(GameObject player, GameObject hookPrefab, InputBindings bindings, MovementSettings settings)
+    public void Initialize(GameObject player, GameObject hookPrefab, InputBindings bindings, MovementSettings settings)
     {
+        this.bindings = bindings;
         abilities = new Ability[] {
             new HookAbility(this, player, hookPrefab, bindings.Hook),
             new DashAbility(this, player, settings, bindings.Dash)
@@ -23,7 +25,20 @@ public class Player
 
     public void Update(float deltaTime)
     {
+        UpdateAim();
         UpdateAbilities(deltaTime);
+    }
+
+    private void UpdateAim()
+    {
+        float dx = NDInput.GetAxis(bindings.Horizontal);
+        float dz = NDInput.GetAxis(bindings.Vertical);
+        Vector3 dir = new Vector3(dx, 0, dz).normalized;
+
+        if (dir.sqrMagnitude > 0)
+        {
+            AimDirection = dir;
+        }
     }
 
     private void UpdateAbilities(float deltaTime)
