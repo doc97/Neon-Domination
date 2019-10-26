@@ -4,7 +4,7 @@ public class Player
 {
     public enum States
     {
-        Hooked, Stunned
+        Dashing, Falling, Hooked, Stunned
     }
 
     #region Fields
@@ -12,11 +12,11 @@ public class Player
     private Ability[] abilities;
     #endregion
 
-    public void InitializeAbilities(GameObject player, GameObject hookPrefab, InputBindings bindings)
+    public void InitializeAbilities(GameObject player, GameObject hookPrefab, InputBindings bindings, MovementSettings settings)
     {
         abilities = new Ability[] {
             new HookAbility(this, player, hookPrefab, bindings.Hook),
-            new DashAbility(this, player, bindings.Dash)
+            new DashAbility(this, player, settings, bindings.Dash)
         };
     }
 
@@ -39,5 +39,17 @@ public class Player
                 ability.Activate();
             }
         }
+    }
+
+    public T GetAbility<T>() where T : Ability
+    {
+        foreach (Ability ability in abilities)
+        {
+            if (ability is T)
+            {
+                return ability as T;
+            }
+        }
+        return null;
     }
 }

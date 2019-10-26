@@ -15,7 +15,7 @@ public abstract class Ability
         InputName = inputName;
     }
 
-    public void Update(float deltaTime)
+    public virtual void Update(float deltaTime)
     {
         Timer = Math.Max(0, Timer - deltaTime);
     }

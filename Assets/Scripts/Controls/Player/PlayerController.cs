@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private Quaternion spawnRotation;
 
     #region Movement
+    private MovementSettings movementSettings;
     private StrafeMovement strafeScheme;
     private RotationalMovement rotateScheme;
     private MovementScheme MovementScheme {
@@ -59,14 +60,14 @@ public class PlayerController : MonoBehaviour
 
     private void Awake() {
         Assert.IsNotNull(prefabs, "No prefab game object given!");
-        MovementSettings settings = new MovementSettings().SetSpeed(speed);
+        movementSettings = new MovementSettings().SetSpeed(speed);
         bindings = new InputBindings()
                         .SetHorizontal(horizontalBinding)
                         .SetVertical(verticalBinding)
                         .SetHook(hookBinding)
                         .SetDash(dashBinding);
-        strafeScheme = new StrafeMovement(settings, bindings);
-        rotateScheme = new RotationalMovement(settings, bindings);
+        strafeScheme = new StrafeMovement(movementSettings, bindings);
+        rotateScheme = new RotationalMovement(movementSettings, bindings);
 
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
@@ -77,25 +78,64 @@ public class PlayerController : MonoBehaviour
         GameObject hookPrefab = prefabs.transform.Find("Hook")?.gameObject;
         Assert.IsNotNull(hookPrefab, "No Hook prefab exists!");
 
-        Player.InitializeAbilities(gameObject, hookPrefab, bindings);
+        Player.InitializeAbilities(gameObject, hookPrefab, bindings, movementSettings);
     }
 
     private void Update()
     {
-        if (Player.State.Value == 0)
-        {
-            MovementScheme?.Update(transform);
-        }
+        CheckFalling();
         CheckRestart();
+        UpdateMovement();
         Player.Update(Time.deltaTime);
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        bool isPlayer = col.gameObject.GetComponent<PlayerController>() != null;
+        if (Player.State.IsOn(Player.States.Dashing) && isPlayer)
+        {
+            Logger.Logf("Dash collision!");
+            Rigidbody body = GetComponent<Rigidbody>();
+            DashAbility dash = Player.GetAbility<DashAbility>();
+            col.gameObject.GetComponent<Rigidbody>().AddForce(body.velocity.normalized * dash.Force / 2, ForceMode.Impulse);
+            body.velocity = Vector3.zero;
+            Player.State.Off(Player.States.Dashing);
+        }
+    }
+
+    private void CheckFalling()
+    {
+        Rigidbody body = GetComponent<Rigidbody>();
+        float horizontalSpeedSqrd = body.velocity.x * body.velocity.x + body.velocity.z * body.velocity.z;
+        float verticalSpeedSqrd = body.velocity.y * body.velocity.y;
+        bool isFalling = body.velocity.y < 0;
+        if (isFalling && verticalSpeedSqrd > horizontalSpeedSqrd)
+        {
+            Player.State.On(Player.States.Falling);
+        }
+        else
+        {
+            Player.State.Off(Player.States.Falling);
+        }
     }
 
     private void CheckRestart()
     {
         if (transform.position.y < RESPAWN_Y_THRESHOLD)
         {
+            Rigidbody body = GetComponent<Rigidbody>();
+            body.velocity = Vector3.zero;
+            body.angularVelocity = Vector3.zero;
             transform.rotation = spawnRotation;
             transform.position = spawnPosition;
+        }
+    }
+
+    private void UpdateMovement()
+    {
+        if (Player.State.Value == 0)
+        {
+            MovementScheme?.Update(transform);
         }
     }
 }
