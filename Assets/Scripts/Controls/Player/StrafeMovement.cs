@@ -18,7 +18,7 @@ public class StrafeMovement : MovementScheme
 
     private void UpdateMovement(Rigidbody body)
     {
-        if (CanMove())
+        if (player.State.Value == 0)
         {
             float dx = NDInput.GetAxis(bindings.Horizontal);
             float dz = NDInput.GetAxis(bindings.Vertical);
@@ -32,11 +32,9 @@ public class StrafeMovement : MovementScheme
 
     private void UpdateRotation(Rigidbody body)
     {
-        body.MoveRotation(Quaternion.LookRotation(player.AimDirection));
-    }
-
-    private bool CanMove()
-    {
-        return player.State.Value == 0;
+        if (player.State.IsOff(Player.States.Stunned))
+        {
+            body.MoveRotation(Quaternion.LookRotation(player.AimDirection));
+        }
     }
 }

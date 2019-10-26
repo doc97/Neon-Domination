@@ -3,6 +3,9 @@ using UnityEngine.Assertions;
 
 public class PlayerController : MonoBehaviour
 {
+    // TOOD: Move it somewhere else
+    private const float STUN_DURATION = 2; // seconds
+
     public enum MovementType
     {
         Strafe, Rotational
@@ -116,6 +119,13 @@ public class PlayerController : MonoBehaviour
 
             body.velocity = Vector3.zero;
             Player.State.Off(Player.States.Dashing);
+        }
+
+        if (Player.State.IsOn(Player.States.Pushed))
+        {
+            Player.State.Off(Player.States.Pushed);
+            Player.State.On(Player.States.Stunned);
+            G.Instance.Pipeline.New().Delay(STUN_DURATION).Func(() => Player.State.Off(Player.States.Stunned));
         }
     }
 
