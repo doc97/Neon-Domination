@@ -10,6 +10,7 @@ public class Hook : MonoBehaviour
     private Rigidbody body;
     private Transform origin;
     private bool reverse;
+    private Player hooked;
 
     private void Awake()
     {
@@ -30,7 +31,7 @@ public class Hook : MonoBehaviour
 
         if ((transform.position - origin.position).magnitude > radius)
         {
-            Destroy(gameObject);
+            Destroy();
         }
     }
 
@@ -40,12 +41,20 @@ public class Hook : MonoBehaviour
         {
             FixedJoint joint = gameObject.AddComponent<FixedJoint>();
             joint.connectedBody = col.rigidbody;
+            hooked = col.gameObject.GetComponent<PlayerController>().Player;
+            hooked.State.On(Player.States.Hooked);
             reverse = true;
         }
         else
         {
-            Destroy(gameObject);
+            Destroy();
         }
+    }
+
+    private void Destroy()
+    {
+        hooked.State.Off(Player.States.Hooked);
+        Destroy(gameObject);
     }
 
     private bool IsTarget(GameObject gameObject)

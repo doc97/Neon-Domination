@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    private Ability[] abilities;
+    public Player Player { get; } = new Player();
     #endregion
 
     private void Awake() {
@@ -51,7 +51,6 @@ public class PlayerController : MonoBehaviour
         movementSettings = new MovementSettings().SetSpeed(speed);
         strafeScheme = new StrafeMovement(movementSettings);
         rotateScheme = new RotationalMovement(movementSettings);
-        abilities = new Ability[0];
 
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
@@ -62,16 +61,17 @@ public class PlayerController : MonoBehaviour
         GameObject hookPrefab = prefabs.transform.Find("Hook")?.gameObject;
         Assert.IsNotNull(hookPrefab, "No Hook prefab exists!");
 
-        abilities = new Ability[] {
-            new HookAbility(gameObject, hookPrefab),
-        };
+        Player.InitializeAbilities(gameObject, hookPrefab);
     }
 
     private void Update()
     {
-        MovementScheme?.Update(transform);
+        if (Player.State.Value == 0)
+        {
+            MovementScheme?.Update(transform);
+        }
         CheckRestart();
-        UpdateAbilties();
+        Player.Update(Time.deltaTime);
     }
 
     private void CheckRestart()
@@ -80,23 +80,6 @@ public class PlayerController : MonoBehaviour
         {
             transform.rotation = spawnRotation;
             transform.position = spawnPosition;
-        }
-    }
-
-    private void UpdateAbilties()
-    {
-        foreach (Ability ability in abilities)
-        {
-            ability.Update(Time.deltaTime);
-
-            if (Input.GetButtonDown(ability.InputName))
-            {
-                if (ability.IsOnCooldown())
-                {
-                    Logger.Logf("Cooldown: {0}", ability.Timer);
-                }
-                ability.Activate();
-            }
         }
     }
 }
