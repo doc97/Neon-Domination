@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
         Rigidbody body = GetComponent<Rigidbody>();
         float horizontalSpeedSqrd = body.velocity.x * body.velocity.x + body.velocity.z * body.velocity.z;
         float verticalSpeedSqrd = body.velocity.y * body.velocity.y;
-        bool isFalling = body.velocity.y < 0;
+        bool isFalling = body.velocity.y < -0.01f;
         if (isFalling && verticalSpeedSqrd > horizontalSpeedSqrd)
         {
             Player.State.On(Player.States.Falling);

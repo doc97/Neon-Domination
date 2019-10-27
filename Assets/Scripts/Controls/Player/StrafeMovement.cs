@@ -3,10 +3,12 @@ using UnityEngine;
 public class StrafeMovement : MovementScheme
 {
     private Player player;
+    private EnumBitField<Player.States> allowedForMovement;
 
     public StrafeMovement(Player player, MovementSettings settings, InputBindings bindings) : base(settings, bindings)
     {
         this.player = player;
+        allowedForMovement = new EnumBitField<Player.States>(Player.States.Hooking);
     }
 
     protected override void UpdateImpl(Transform t)
@@ -18,15 +20,24 @@ public class StrafeMovement : MovementScheme
 
     private void UpdateMovement(Rigidbody body)
     {
-        if (player.State.Value == 0)
+        if (!(player.State.Value == 0 || player.State == allowedForMovement))
         {
-            float dx = NDInput.GetAxis(bindings.Horizontal);
-            float dz = NDInput.GetAxis(bindings.Vertical);
-            if (dx != 0 || dz != 0)
-            {
-                body.AddForce(player.AimDirection * settings.Acceleration, ForceMode.Acceleration);// * Time.deltaTime);
-                body.velocity = Vector3.ClampMagnitude(body.velocity, settings.MaxSpeed);
-            }
+            return;
+        }
+
+        float dx = NDInput.GetAxis(bindings.Horizontal);
+        float dz = NDInput.GetAxis(bindings.Vertical);
+        Vector3 force = player.AimDirection * settings.Acceleration;
+
+        if (player.State.IsOn(Player.States.Hooking))
+        {
+            force *= 0.8f;
+        }
+
+        if (dx != 0 || dz != 0)
+        {
+            body.AddForce(force, ForceMode.Acceleration);
+            body.velocity = Vector3.ClampMagnitude(body.velocity, settings.MaxSpeed);
         }
     }
 
