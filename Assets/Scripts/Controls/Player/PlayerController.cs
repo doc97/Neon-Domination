@@ -3,9 +3,6 @@ using UnityEngine.Assertions;
 
 public class PlayerController : MonoBehaviour
 {
-    // TOOD: Move it somewhere else
-    private const float STUN_DURATION = 2; // seconds
-
     public enum MovementType
     {
         Strafe, Rotational
@@ -15,6 +12,10 @@ public class PlayerController : MonoBehaviour
 
     #region Fields
     #region Serialized
+    [Header("Configuration")]
+    [SerializeField]
+    private GameObject settings;
+
     [Header("Controls")]
     [SerializeField]
     private string horizontalBinding;
@@ -40,7 +41,6 @@ public class PlayerController : MonoBehaviour
     private Quaternion spawnRotation;
 
     #region Movement
-    private MovementSettings movementSettings;
     private StrafeMovement strafeScheme;
     private RotationalMovement rotateScheme;
     private MovementScheme MovementScheme {
@@ -59,7 +59,12 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region Settings
     private InputBindings bindings;
+    private MovementSettings movementSettings;
+    private GameplaySettings gameplaySettings;
+    #endregion
+
     public Player Player { get; } = new Player();
     #endregion
 
@@ -85,7 +90,8 @@ public class PlayerController : MonoBehaviour
         GameObject hookPrefab = prefabs.transform.Find("Hook")?.gameObject;
         Assert.IsNotNull(hookPrefab, "No Hook prefab exists!");
 
-        Player.Initialize(gameObject, hookPrefab, bindings, movementSettings);
+        gameplaySettings = settings.GetComponent<Settings>()?.Gameplay ?? new GameplaySettings();
+        Player.Initialize(gameObject, hookPrefab, bindings, movementSettings, gameplaySettings);
     }
 
     private void Update()
@@ -125,7 +131,7 @@ public class PlayerController : MonoBehaviour
         {
             Player.State.Off(Player.States.Pushed);
             Player.State.On(Player.States.Stunned);
-            G.Instance.Pipeline.New().Delay(STUN_DURATION).Func(() => Player.State.Off(Player.States.Stunned));
+            G.Instance.Pipeline.New().Delay(gameplaySettings.StunDuration).Func(() => Player.State.Off(Player.States.Stunned));
         }
     }
 

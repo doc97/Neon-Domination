@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class HookAbility : Ability
 {
-    private const float COOLDOWN = 5; // seconds
-
     #region Fields
     private Player player;
     private GameObject playerObj;
     private GameObject hookObj;
     #endregion
 
-    public HookAbility(Player player, GameObject playerObj, GameObject hookObj, string inputName) : base("Hook", COOLDOWN, inputName)
+    public HookAbility(Player player, GameObject playerObj, GameObject hookObj, float cooldown, string inputName) : base("Hook", cooldown, inputName)
     {
         this.player = player;
         this.playerObj = playerObj;

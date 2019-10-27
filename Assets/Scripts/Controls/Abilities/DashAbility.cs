@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class DashAbility : Ability
 {
-    private const float COOLDOWN = 4; // seconds
-
     #region Fields
-    public float Force { get; } = 30;
+    public float Force { get; }
     private Player player;
     private GameObject playerObj;
     private MovementSettings movementSettings;
     #endregion
 
-    public DashAbility(Player player, GameObject playerObj, MovementSettings movementSettings, string inputName) : base("Dash", COOLDOWN, inputName)
+    public DashAbility(Player player, GameObject playerObj, MovementSettings movementSettings, float force, float cooldown, string inputName)
+        : base("Dash", cooldown, inputName)
     {
         this.player = player;
         this.playerObj = playerObj;
         this.movementSettings = movementSettings;
+        Force = force;
     }
 
     protected override void ActivateImpl()

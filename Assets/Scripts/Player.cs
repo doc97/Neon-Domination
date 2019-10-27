@@ -17,12 +17,12 @@ public class Player
     private InputBindings bindings;
     #endregion
 
-    public void Initialize(GameObject player, GameObject hookPrefab, InputBindings bindings, MovementSettings settings)
+    public void Initialize(GameObject player, GameObject hookPrefab, InputBindings bindings, MovementSettings movementSettings, GameplaySettings gameplaySettings)
     {
         this.bindings = bindings;
         abilities = new Ability[] {
-            new HookAbility(this, player, hookPrefab, bindings.Hook),
-            new DashAbility(this, player, settings, bindings.Dash)
+            new HookAbility(this, player, hookPrefab, gameplaySettings.HookCooldown, bindings.Hook),
+            new DashAbility(this, player, movementSettings, gameplaySettings.DashForce, gameplaySettings.DashCooldown, bindings.Dash)
         };
     }
 

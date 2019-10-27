@@ -6,13 +6,6 @@ public class MovementSettings
     public float Acceleration { get; private set; }
     #endregion
 
-    public static MovementSettings Defaults()
-    {
-        MovementSettings settings = new MovementSettings();
-        settings.MaxSpeed = 1;
-        return settings;
-    }
-
     public MovementSettings SetMaxSpeed(float maxSpeed)
     {
         MaxSpeed = maxSpeed;
