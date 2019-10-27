@@ -32,7 +32,7 @@ public class StrafeMovement : MovementScheme
 
     private void UpdateRotation(Rigidbody body)
     {
-        if (player.State.IsOff(Player.States.Stunned))
+        if (player.State.AreOff(Player.States.Stunned, Player.States.Hooked, Player.States.Hooking))
         {
             body.MoveRotation(Quaternion.LookRotation(player.AimDirection));
         }

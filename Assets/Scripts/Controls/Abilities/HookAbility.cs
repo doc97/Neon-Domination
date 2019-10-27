@@ -20,11 +20,20 @@ public class HookAbility : Ability
     protected override void ActivateImpl()
     {
         Logger.Logf("Ability ({0}): activated", Name);
+
+        playerObj.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        player.State.On(Player.States.Hooking);
+        Pipeline pipe = G.Instance.Pipeline.New().Delay(0.6f).Func(() => {
+            player.State.Off(Player.States.Hooking);
+        });
+
         Quaternion rot = playerObj.transform.rotation * hookObj.transform.localRotation;
         Vector3 pos = playerObj.transform.position + hookObj.transform.localPosition + playerObj.transform.forward * 2;
         GameObject instance = GameObject.Instantiate(hookObj, pos, rot, GameObject.Find("_Dynamic").transform);
         instance.GetComponent<Hook>().SetOrigin(playerObj.transform);
+        instance.GetComponent<Hook>().SetCancelPipe(pipe);
         instance.SetActive(true);
+
     }
 
     protected override bool CanActivateImpl()

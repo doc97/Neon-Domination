@@ -4,13 +4,13 @@ public class Hook : MonoBehaviour
 {
     [SerializeField]
     private float speed = 0.2f;
-    [SerializeField]
-    private float radius = 10;
 
     private Rigidbody body;
     private Transform origin;
     private bool reverse;
+    private Player hooking;
     private Player hooked;
+    private Pipeline cancel;
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class Hook : MonoBehaviour
             body.MovePosition(transform.position + transform.forward * speed);
         }
 
-        if ((transform.position - origin.position).magnitude > radius)
+        if (hooking.State.IsOff(Player.States.Hooking))
         {
             Destroy();
         }
@@ -43,6 +43,7 @@ public class Hook : MonoBehaviour
             joint.connectedBody = col.rigidbody;
             hooked = col.gameObject.GetComponent<PlayerController>().Player;
             hooked.State.On(Player.States.Hooked);
+            cancel.Abort();
             reverse = true;
         }
         else
@@ -54,6 +55,7 @@ public class Hook : MonoBehaviour
     private void Destroy()
     {
         hooked?.State.Off(Player.States.Hooked);
+        hooking.State.Off(Player.States.Hooking);
         Destroy(gameObject);
     }
 
@@ -65,5 +67,11 @@ public class Hook : MonoBehaviour
     public void SetOrigin(Transform origin)
     {
         this.origin = origin;
+        this.hooking = origin.GetComponent<PlayerController>().Player;
+    }
+
+    public void SetCancelPipe(Pipeline cancel)
+    {
+        this.cancel = cancel;
     }
 }

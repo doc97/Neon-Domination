@@ -4,7 +4,10 @@ public class Player
 {
     public enum States
     {
-        Dashing, Falling, Hooked, Pushed, Stunned
+        Dashing, Pushed,
+        Hooking, Hooked,
+        Falling,
+        Stunned,
     }
 
     #region Fields
