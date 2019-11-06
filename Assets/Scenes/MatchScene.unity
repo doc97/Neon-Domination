@@ -850,11 +850,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4720815393050686858, guid: 20f87e355d3b4ec4497cb70c592e39fb,
         type: 3}
-      propertyPath: prefabs
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4720815393050686858, guid: 20f87e355d3b4ec4497cb70c592e39fb,
-        type: 3}
       propertyPath: settings
       value: 
       objectReference: {fileID: 1363836344}
