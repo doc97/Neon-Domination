@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class Player
-{
-    public enum States
-    {
+public class Player {
+    public enum States {
         Dashing, Pushed,
         Hooking, Hooked,
         Falling,
@@ -17,8 +15,7 @@ public class Player
     private InputBindings bindings;
     #endregion
 
-    public void Initialize(GameObject player, GameObject hookPrefab, InputBindings bindings, MovementSettings movementSettings, GameplaySettings gameplaySettings)
-    {
+    public void Initialize(GameObject player, GameObject hookPrefab, InputBindings bindings, MovementSettings movementSettings, GameplaySettings gameplaySettings) {
         this.bindings = bindings;
         abilities = new Ability[] {
             new HookAbility(this, player, hookPrefab, gameplaySettings.HookCooldown, bindings.Hook),
@@ -26,33 +23,26 @@ public class Player
         };
     }
 
-    public void Update(float deltaTime)
-    {
+    public void Update(float deltaTime) {
         UpdateAim();
         UpdateAbilities(deltaTime);
     }
 
-    private void UpdateAim()
-    {
+    private void UpdateAim() {
         float dx = NDInput.GetAxisRaw(bindings.Horizontal);
         float dz = NDInput.GetAxisRaw(bindings.Vertical);
         Vector3 dir = new Vector3(dx, 0, dz).normalized;
 
-        if (dir.sqrMagnitude > 0)
-        {
+        if (dir.sqrMagnitude > 0) {
             AimDirection = dir;
         }
     }
 
-    private void UpdateAbilities(float deltaTime)
-    {
-        foreach (Ability ability in abilities)
-        {
+    private void UpdateAbilities(float deltaTime) {
+        foreach (Ability ability in abilities) {
             ability.Update(deltaTime);
-            if (NDInput.GetButtonDown(ability.InputName))
-            {
-                if (ability.IsOnCooldown())
-                {
+            if (NDInput.GetButtonDown(ability.InputName)) {
+                if (ability.IsOnCooldown()) {
                     Logger.Logf("Cooldown: {0}", ability.Timer);
                 }
                 ability.Activate();
@@ -60,12 +50,9 @@ public class Player
         }
     }
 
-    public T GetAbility<T>() where T : Ability
-    {
-        foreach (Ability ability in abilities)
-        {
-            if (ability is T)
-            {
+    public T GetAbility<T>() where T : Ability {
+        foreach (Ability ability in abilities) {
+            if (ability is T) {
                 return ability as T;
             }
         }
