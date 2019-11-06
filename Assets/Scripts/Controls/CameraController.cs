@@ -18,12 +18,11 @@ public class CameraController : MonoBehaviour
         offset = target.transform.position - transform.position;
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-        Vector3 newPosition = target.transform.position - offset;
+        Vector3 newPosition = target.transform.position;
         newPosition.y = transform.position.y;
 
-        transform.position = newPosition;
-        transform.LookAt(target.transform);
+        transform.position = Vector3.Lerp(transform.position, newPosition, Time.fixedDeltaTime);
     }
 }

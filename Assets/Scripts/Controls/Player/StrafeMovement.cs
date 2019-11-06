@@ -17,7 +17,6 @@ public class StrafeMovement : MovementScheme
         UpdateMovement(body);
         UpdateRotation(body);
     }
-
     private void UpdateMovement(Rigidbody body)
     {
         if (!(player.State.Value == 0 || player.State == allowedForMovement))
@@ -25,9 +24,9 @@ public class StrafeMovement : MovementScheme
             return;
         }
 
-        float dx = NDInput.GetAxis(bindings.Horizontal);
-        float dz = NDInput.GetAxis(bindings.Vertical);
-        Vector3 force = player.AimDirection * settings.Acceleration;
+        float dx = NDInput.GetAxisRaw(bindings.Horizontal);
+        float dz = NDInput.GetAxisRaw(bindings.Vertical);
+        Vector3 force = new Vector3(dx, 0, dz).normalized * settings.Acceleration;
 
         if (player.State.IsOn(Player.States.Hooking))
         {
@@ -36,8 +35,8 @@ public class StrafeMovement : MovementScheme
 
         if (dx != 0 || dz != 0)
         {
-            body.AddForce(force, ForceMode.Acceleration);
-            body.velocity = Vector3.ClampMagnitude(body.velocity, settings.MaxSpeed);
+            body.AddForce(force * Time.fixedDeltaTime * 50, ForceMode.Acceleration);
+            body.velocity = Vector3.ClampMagnitude(force, settings.MaxSpeed);
         }
     }
 

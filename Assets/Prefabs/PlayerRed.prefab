@@ -7,7 +7,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3515655690425990334}
-  m_Material: {fileID: 13400000, guid: 2edaa68aa3b51cc468864ce35d651ada, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -74,14 +74,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ba4aefa40b17c4fa381a646acf8018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 0}
   horizontalBinding: 
   verticalBinding: 
   hookBinding: 
   dashBinding: 
-  maxSpeed: 10
-  acceleration: 40
+  maxSpeed: 16
+  acceleration: 12
   movementType: 0
-  prefabs: {fileID: 0}
+  prefabs: {fileID: 8726516814819014684, guid: 5aaf6fd956a69f644a018b833d4d1c00, type: 3}
 --- !u!1001 &4894272803968427447
 PrefabInstance:
   m_ObjectHideFlags: 0

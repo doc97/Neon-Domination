@@ -34,8 +34,8 @@ public class Player
 
     private void UpdateAim()
     {
-        float dx = NDInput.GetAxis(bindings.Horizontal);
-        float dz = NDInput.GetAxis(bindings.Vertical);
+        float dx = NDInput.GetAxisRaw(bindings.Horizontal);
+        float dz = NDInput.GetAxisRaw(bindings.Vertical);
         Vector3 dir = new Vector3(dx, 0, dz).normalized;
 
         if (dir.sqrMagnitude > 0)

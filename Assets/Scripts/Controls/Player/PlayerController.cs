@@ -66,6 +66,8 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     public Player Player { get; } = new Player();
+
+    private bool isOnFloor;
     #endregion
 
     private void Awake() {
@@ -99,11 +101,28 @@ public class PlayerController : MonoBehaviour
         CheckFalling();
         CheckRestart();
         Player.Update(Time.deltaTime);
-        MovementScheme?.Update(transform);
+    }
+
+    private void FixedUpdate()
+    {
+        if (isOnFloor)
+        {
+            MovementScheme?.Update(transform);
+        }
+
+        float friction = 0.9f;
+        Vector3 vel = GetComponent<Rigidbody>().velocity;
+        vel.Set(vel.x * friction, vel.y, vel.z * friction);
+        GetComponent<Rigidbody>().velocity = vel;
     }
 
     private void OnCollisionEnter(Collision col)
     {
+        if (col.gameObject.name == "Floor")
+        {
+            isOnFloor = true;
+        }
+
         bool isPlayer = col.gameObject.GetComponent<PlayerController>() != null;
         if (Player.State.IsOn(Player.States.Dashing) && isPlayer)
         {
@@ -135,20 +154,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionExit(Collision col)
+    {
+        if (col.gameObject.name == "Floor")
+        {
+            isOnFloor = false;
+        }
+    }
+
     private void CheckFalling()
     {
-        Rigidbody body = GetComponent<Rigidbody>();
-        float horizontalSpeedSqrd = body.velocity.x * body.velocity.x + body.velocity.z * body.velocity.z;
-        float verticalSpeedSqrd = body.velocity.y * body.velocity.y;
-        bool isFalling = body.velocity.y < -0.01f;
-        if (isFalling && verticalSpeedSqrd > horizontalSpeedSqrd)
-        {
-            Player.State.On(Player.States.Falling);
-        }
-        else
-        {
-            Player.State.Off(Player.States.Falling);
-        }
+        if (isOnFloor)  { Player.State.Off(Player.States.Falling); }
+        else            { Player.State.On(Player.States.Falling); }
     }
 
     private void CheckRestart()
