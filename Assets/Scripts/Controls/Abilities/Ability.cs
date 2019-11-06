@@ -1,7 +1,6 @@
 using System;
 
-public abstract class Ability
-{
+public abstract class Ability {
     #region Fields
     public string Name { get; }
     public float Cooldown { get; protected set; }
@@ -15,32 +14,26 @@ public abstract class Ability
         InputName = inputName;
     }
 
-    public virtual void Update(float deltaTime)
-    {
+    public virtual void Update(float deltaTime) {
         Timer = Math.Max(0, Timer - deltaTime);
     }
 
-    public void Activate()
-    {
-        if (CanActivate())
-        {
+    public void Activate() {
+        if (CanActivate()) {
             ActivateImpl();
             ResetCooldown();
         }
     }
 
-    public void ResetCooldown()
-    {
+    public void ResetCooldown() {
         Timer = Cooldown;
     }
 
-    public bool IsOnCooldown()
-    {
+    public bool IsOnCooldown() {
         return Timer > 0;
     }
 
-    public bool CanActivate()
-    {
+    public bool CanActivate() {
         return !IsOnCooldown() && CanActivateImpl();
     }
 

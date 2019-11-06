@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
 
-public class CameraController : MonoBehaviour
-{
+public class CameraController : MonoBehaviour {
     #region Fields
     [SerializeField]
     private Transform target;
@@ -18,8 +17,7 @@ public class CameraController : MonoBehaviour
         offset = target.transform.position - transform.position;
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         Vector3 newPosition = target.transform.position;
         newPosition.y = transform.position.y;
 

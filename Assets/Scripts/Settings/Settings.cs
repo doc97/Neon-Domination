@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class Settings : MonoBehaviour
-{
+public class Settings : MonoBehaviour {
     #region Fields
     [SerializeField, Tooltip("In seconds")]
     private float dashCooldown;
@@ -13,15 +12,13 @@ public class Settings : MonoBehaviour
     private float stunDuration;
 
     public GameplaySettings Gameplay { get; private set; }
+    #endregion
 
-    private void Awake()
-    {
+    private void Awake() {
         Gameplay = new GameplaySettings()
                     .SetDashCooldown(dashCooldown)
                     .SetDashForce(dashForce)
                     .SetHookCooldown(hookCooldown)
                     .SetStunDuration(stunDuration);
     }
-    #endregion
-
 }

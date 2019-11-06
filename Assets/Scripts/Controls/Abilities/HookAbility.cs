@@ -1,22 +1,19 @@
 using UnityEngine;
 
-public class HookAbility : Ability
-{
+public class HookAbility : Ability {
     #region Fields
     private Player player;
     private GameObject playerObj;
     private GameObject hookObj;
     #endregion
 
-    public HookAbility(Player player, GameObject playerObj, GameObject hookObj, float cooldown, string inputName) : base("Hook", cooldown, inputName)
-    {
+    public HookAbility(Player player, GameObject playerObj, GameObject hookObj, float cooldown, string inputName) : base("Hook", cooldown, inputName) {
         this.player = player;
         this.playerObj = playerObj;
         this.hookObj = hookObj;
     }
 
-    protected override void ActivateImpl()
-    {
+    protected override void ActivateImpl() {
         Logger.Logf("Ability ({0}): activated", Name);
 
         playerObj.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
@@ -34,8 +31,7 @@ public class HookAbility : Ability
 
     }
 
-    protected override bool CanActivateImpl()
-    {
+    protected override bool CanActivateImpl() {
         return player.State.Value == 0;
     }
 }

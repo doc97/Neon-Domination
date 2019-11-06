@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public abstract class MovementScheme
-{
+public abstract class MovementScheme {
     #region Fields
     protected MovementSettings settings;
     protected InputBindings bindings;
@@ -12,8 +11,7 @@ public abstract class MovementScheme
         this.bindings = bindings;
     }
 
-    public void Update(Transform t)
-    {
+    public void Update(Transform t) {
         UpdateImpl(t);
     }
 

@@ -1,5 +1,4 @@
-public interface ILogger
-{
+public interface ILogger {
     void Log(object message);
     void Logf(string format, params object[] args);
 

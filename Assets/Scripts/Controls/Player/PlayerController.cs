@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
 
-public class PlayerController : MonoBehaviour
-{
-    public enum MovementType
-    {
+public class PlayerController : MonoBehaviour {
+    public enum MovementType {
         Strafe, Rotational
     }
 
@@ -44,10 +42,8 @@ public class PlayerController : MonoBehaviour
     private StrafeMovement strafeScheme;
     private RotationalMovement rotateScheme;
     private MovementScheme MovementScheme {
-        get
-        {
-            switch (movementType)
-            {
+        get {
+            switch (movementType) {
                 case MovementType.Strafe:
                     return strafeScheme;
                 case MovementType.Rotational:
@@ -87,8 +83,7 @@ public class PlayerController : MonoBehaviour
         spawnRotation = transform.rotation;
     }
 
-    private void Start()
-    {
+    private void Start() {
         GameObject hookPrefab = prefabs.transform.Find("Hook")?.gameObject;
         Assert.IsNotNull(hookPrefab, "No Hook prefab exists!");
 
@@ -96,17 +91,14 @@ public class PlayerController : MonoBehaviour
         Player.Initialize(gameObject, hookPrefab, bindings, movementSettings, gameplaySettings);
     }
 
-    private void Update()
-    {
+    private void Update() {
         CheckFalling();
         CheckRestart();
         Player.Update(Time.deltaTime);
     }
 
-    private void FixedUpdate()
-    {
-        if (isOnFloor)
-        {
+    private void FixedUpdate() {
+        if (isOnFloor) {
             MovementScheme?.Update(transform);
         }
 
@@ -116,16 +108,13 @@ public class PlayerController : MonoBehaviour
         GetComponent<Rigidbody>().velocity = vel;
     }
 
-    private void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.name == "Floor")
-        {
+    private void OnCollisionEnter(Collision col) {
+        if (col.gameObject.name == "Floor") {
             isOnFloor = true;
         }
 
         bool isPlayer = col.gameObject.GetComponent<PlayerController>() != null;
-        if (Player.State.IsOn(Player.States.Dashing) && isPlayer)
-        {
+        if (Player.State.IsOn(Player.States.Dashing) && isPlayer) {
             Rigidbody body = GetComponent<Rigidbody>();
             DashAbility dash = Player.GetAbility<DashAbility>();
             Rigidbody otherBody = col.gameObject.GetComponent<Rigidbody>();
@@ -146,32 +135,26 @@ public class PlayerController : MonoBehaviour
             Player.State.Off(Player.States.Dashing);
         }
 
-        if (Player.State.IsOn(Player.States.Pushed))
-        {
+        if (Player.State.IsOn(Player.States.Pushed)) {
             Player.State.Off(Player.States.Pushed);
             Player.State.On(Player.States.Stunned);
             G.Instance.Pipeline.New().Delay(gameplaySettings.StunDuration).Func(() => Player.State.Off(Player.States.Stunned));
         }
     }
 
-    private void OnCollisionExit(Collision col)
-    {
-        if (col.gameObject.name == "Floor")
-        {
+    private void OnCollisionExit(Collision col) {
+        if (col.gameObject.name == "Floor") {
             isOnFloor = false;
         }
     }
 
-    private void CheckFalling()
-    {
+    private void CheckFalling() {
         if (isOnFloor)  { Player.State.Off(Player.States.Falling); }
         else            { Player.State.On(Player.States.Falling); }
     }
 
-    private void CheckRestart()
-    {
-        if (transform.position.y < RESPAWN_Y_THRESHOLD)
-        {
+    private void CheckRestart() {
+        if (transform.position.y < RESPAWN_Y_THRESHOLD) {
             Rigidbody body = GetComponent<Rigidbody>();
             body.velocity = Vector3.zero;
             body.angularVelocity = Vector3.zero;
