@@ -1134,7 +1134,7 @@ GameObject:
   - component: {fileID: 2027515627}
   - component: {fileID: 2027515630}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1184,7 +1184,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b7e47e8d7ad80b645b6b977ad2c450a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1222,7 +1222,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2027515625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3967360075b2d9142ac74f35d02d577f, type: 3}
+  m_Script: {fileID: 11500000, guid: a3cc2ac65db8cf46381dd6fd25aca519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2591783400654592733
