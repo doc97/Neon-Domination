@@ -11,11 +11,17 @@ public class Player {
     #region Fields
     public EnumBitField<States> State { get; } = new EnumBitField<States>();
     public Vector3 AimDirection { get; private set; } = new Vector3(0, 0, 1);
+    public bool HasOrb { get => orb != null; }
+
+    private GameObject gameObject;
     private Ability[] abilities;
     private InputBindings bindings;
+
+    private Orb orb;
     #endregion
 
     public void Initialize(GameObject player, GameObject hookPrefab, InputBindings bindings, MovementSettings movementSettings, GameplaySettings gameplaySettings) {
+        this.gameObject = player;
         this.bindings = bindings;
         abilities = new Ability[] {
             new HookAbility(this, player, hookPrefab, gameplaySettings.HookCooldown, bindings.Hook),
@@ -48,6 +54,15 @@ public class Player {
                 ability.Activate();
             }
         }
+    }
+
+    public void PickupOrb(Orb orb) {
+        this.orb = orb;
+    }
+
+    public void DropOrb() {
+        orb.Spawn(gameObject.transform.position);
+        orb = null;
     }
 
     public T GetAbility<T>() where T : Ability {

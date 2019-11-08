@@ -163,6 +163,10 @@ public class PlayerController : MonoBehaviour {
 
         body.velocity = Vector3.zero;
         Player.State.Off(Player.States.Dashing);
+
+        if (otherPlayer.HasOrb) {
+            otherPlayer.DropOrb();
+        }
     }
 
     private void GetStunned() {

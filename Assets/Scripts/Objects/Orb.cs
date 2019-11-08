@@ -1,13 +1,42 @@
 using UnityEngine;
 
 public class Orb : MonoBehaviour {
-    private Player player;
+
+    private const float DROP_COOLDOWN_SEC = 2;
+
+    #region Fields
+    private bool active;
+    #endregion
+
+    public void Spawn(Vector3 position, float cooldown = DROP_COOLDOWN_SEC) {
+        Deactivate();
+        transform.position = position;
+        G.Instance.Pipeline.New().Delay(cooldown).Func(Activate);
+    }
+
+    private void Start() {
+        Spawn(transform.position, 0);
+    }
 
     private void OnTriggerEnter(Collider col) {
-        PlayerController controller = col.gameObject.GetComponent<PlayerController>();
-        if (controller != null) {
-            player = controller.Player;
+        Player player = col.gameObject.GetComponentInParent<PlayerController>()?.Player;
+        if (active && player != null) {
+            player.PickupOrb(this);
+            // To avoid multiple players picking up the orb, it is deactivated
+            active = false;
+            transform.position = new Vector3(0, -100, 0);
         }
-        Logger.Logf("Orb picked up!");
+    }
+
+    private void Deactivate() {
+        active = false;
+        Material mat = GetComponent<Renderer>().material;
+        mat.DisableKeyword("_EMISSION");
+    }
+
+    private void Activate() {
+        active = true;
+        Material mat = GetComponent<Renderer>().material;
+        mat.EnableKeyword("_EMISSION");
     }
 }
