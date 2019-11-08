@@ -109,36 +109,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision col) {
-        if (col.gameObject.name == "Floor") {
+        if (col.gameObject.tag == "Floor") {
             isOnFloor = true;
         }
 
         bool isPlayer = col.gameObject.GetComponent<PlayerController>() != null;
         if (Player.State.IsOn(Player.States.Dashing) && isPlayer) {
-            Rigidbody body = GetComponent<Rigidbody>();
-            DashAbility dash = Player.GetAbility<DashAbility>();
-            Rigidbody otherBody = col.gameObject.GetComponent<Rigidbody>();
-            Player otherPlayer = col.gameObject.GetComponent<PlayerController>().Player;
-
-            otherPlayer.State.On(Player.States.Pushed);
-            G.Instance.Pipeline.New().
-                Func(() => {
-                    Vector3 force = otherBody.velocity.normalized * 0.5f * dash.Force;
-                    otherBody.AddForce(force, ForceMode.Impulse);
-                })
-                .Delay(0.8f)
-                .Func(() => {
-                    otherPlayer.State.Off(Player.States.Pushed);
-                });
-
-            body.velocity = Vector3.zero;
-            Player.State.Off(Player.States.Dashing);
+            Push(col.gameObject);
         }
 
         if (Player.State.IsOn(Player.States.Pushed)) {
-            Player.State.Off(Player.States.Pushed);
-            Player.State.On(Player.States.Stunned);
-            G.Instance.Pipeline.New().Delay(gameplaySettings.StunDuration).Func(() => Player.State.Off(Player.States.Stunned));
+            GetStunned();
         }
     }
 
@@ -161,5 +142,32 @@ public class PlayerController : MonoBehaviour {
             transform.rotation = spawnRotation;
             transform.position = spawnPosition;
         }
+    }
+
+    private void Push(GameObject target) {
+        Rigidbody body = GetComponent<Rigidbody>();
+        DashAbility dash = Player.GetAbility<DashAbility>();
+        Rigidbody otherBody = target.GetComponent<Rigidbody>();
+        Player otherPlayer = target.GetComponent<PlayerController>().Player;
+
+        otherPlayer.State.On(Player.States.Pushed);
+        G.Instance.Pipeline.New().
+            Func(() => {
+                Vector3 force = otherBody.velocity.normalized * 0.5f * dash.Force;
+                otherBody.AddForce(force, ForceMode.Impulse);
+            })
+            .Delay(0.8f)
+            .Func(() => {
+                otherPlayer.State.Off(Player.States.Pushed);
+            });
+
+        body.velocity = Vector3.zero;
+        Player.State.Off(Player.States.Dashing);
+    }
+
+    private void GetStunned() {
+        Player.State.Off(Player.States.Pushed);
+        Player.State.On(Player.States.Stunned);
+        G.Instance.Pipeline.New().Delay(gameplaySettings.StunDuration).Func(() => Player.State.Off(Player.States.Stunned));
     }
 }
