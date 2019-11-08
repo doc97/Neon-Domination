@@ -132,6 +132,10 @@ public class PlayerController : MonoBehaviour {
     private void CheckFalling() {
         if (isOnFloor)  { Player.State.Off(Player.States.Falling); }
         else            { Player.State.On(Player.States.Falling); }
+
+        if (Player.HasOrb && Player.State == Player.States.Falling) {
+            Player.DropOrb(null);
+        }
     }
 
     private void CheckRestart() {
@@ -165,7 +169,7 @@ public class PlayerController : MonoBehaviour {
         Player.State.Off(Player.States.Dashing);
 
         if (otherPlayer.HasOrb) {
-            otherPlayer.DropOrb();
+            otherPlayer.DropOrb(otherBody.transform.position);
         }
     }
 

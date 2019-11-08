@@ -5,17 +5,22 @@ public class Orb : MonoBehaviour {
     private const float DROP_COOLDOWN_SEC = 2;
 
     #region Fields
+    private Vector3 spawnPosition;
     private bool active;
     #endregion
 
-    public void Spawn(Vector3 position, float cooldown = DROP_COOLDOWN_SEC) {
+    public void Spawn(Vector3? position, float cooldown = DROP_COOLDOWN_SEC) {
         Deactivate();
-        transform.position = position;
+        transform.position = position ?? spawnPosition;
         G.Instance.Pipeline.New().Delay(cooldown).Func(Activate);
     }
 
+    private void Awake() {
+        spawnPosition = transform.position;
+    }
+
     private void Start() {
-        Spawn(transform.position, 0);
+        Spawn(null, 0);
     }
 
     private void OnTriggerEnter(Collider col) {
@@ -24,7 +29,7 @@ public class Orb : MonoBehaviour {
             player.PickupOrb(this);
             // To avoid multiple players picking up the orb, it is deactivated
             active = false;
-            transform.position = new Vector3(0, -100, 0);
+            transform.position = new Vector3(0, 100, 0);
         }
     }
 

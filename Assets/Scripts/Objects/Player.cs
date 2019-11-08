@@ -13,7 +13,6 @@ public class Player {
     public Vector3 AimDirection { get; private set; } = new Vector3(0, 0, 1);
     public bool HasOrb { get => orb != null; }
 
-    private GameObject gameObject;
     private Ability[] abilities;
     private InputBindings bindings;
 
@@ -21,7 +20,6 @@ public class Player {
     #endregion
 
     public void Initialize(GameObject player, GameObject hookPrefab, InputBindings bindings, MovementSettings movementSettings, GameplaySettings gameplaySettings) {
-        this.gameObject = player;
         this.bindings = bindings;
         abilities = new Ability[] {
             new HookAbility(this, player, hookPrefab, gameplaySettings.HookCooldown, bindings.Hook),
@@ -60,8 +58,8 @@ public class Player {
         this.orb = orb;
     }
 
-    public void DropOrb() {
-        orb.Spawn(gameObject.transform.position);
+    public void DropOrb(Vector3? position) {
+        orb?.Spawn(position);
         orb = null;
     }
 
