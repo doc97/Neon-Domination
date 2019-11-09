@@ -43,10 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8726f46454eddfc47abd23a99247aee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashCooldown: 4
-  dashForce: 30
-  hookCooldown: 5
-  stunDuration: 2
+  dashCooldown: 2.5
+  dashForce: 64
+  hookCooldown: 3
+  stunDuration: 2.5
 --- !u!1 &2591783400579198968
 GameObject:
   m_ObjectHideFlags: 0
