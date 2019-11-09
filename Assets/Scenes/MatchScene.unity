@@ -1046,6 +1046,11 @@ PrefabInstance:
       propertyPath: settings
       value: 
       objectReference: {fileID: 1363836344}
+    - target: {fileID: 4524312547541191999, guid: 20f87e355d3b4ec4497cb70c592e39fb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20f87e355d3b4ec4497cb70c592e39fb, type: 3}
 --- !u!1 &1567345187
@@ -1212,6 +1217,11 @@ PrefabInstance:
       propertyPath: settings
       value: 
       objectReference: {fileID: 1363836344}
+    - target: {fileID: 5881767502497013440, guid: 58b3fe92571c71149b173db865aaca60,
+        type: 3}
+      propertyPath: m_Name
+      value: Effect
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58b3fe92571c71149b173db865aaca60, type: 3}
 --- !u!4 &1584002409 stripped

@@ -16,6 +16,7 @@ public class Player {
     private Ability[] abilities;
     private InputBindings bindings;
 
+    private GameObject effect;
     private Orb orb;
     #endregion
 
@@ -25,6 +26,8 @@ public class Player {
             new HookAbility(this, player, hookPrefab, gameplaySettings.HookCooldown, bindings.Hook),
             new DashAbility(this, player, movementSettings, gameplaySettings.DashForce, gameplaySettings.DashCooldown, bindings.Dash)
         };
+        effect = player.transform.Find("Effect").gameObject;
+        effect.SetActive(false);
     }
 
     public void Update(float deltaTime) {
@@ -55,10 +58,12 @@ public class Player {
     }
 
     public void PickupOrb(Orb orb) {
+        effect.SetActive(true);
         this.orb = orb;
     }
 
     public void DropOrb(Vector3? position) {
+        effect.SetActive(false);
         orb?.Spawn(position);
         orb = null;
     }
