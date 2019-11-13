@@ -86,7 +86,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
-    - Vector1_399EE016: 2
+    - Vector1_399EE016: 0.4
     - _AlphaClip: 0
     - _Blend: 0
     - _BlendOp: 0
