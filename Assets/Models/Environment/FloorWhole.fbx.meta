@@ -3,7 +3,17 @@ guid: c60ed94655f696121b206f871cc7bd04
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Emission
+    second: {fileID: 2100000, guid: 8e3524d9c0385cccbb6d16ff664e9cbb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorMat
+    second: {fileID: 2100000, guid: 6e13fa3cf1a3c8149a2b549a7d4e429b, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
