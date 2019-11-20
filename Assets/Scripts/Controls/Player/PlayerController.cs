@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnCollisionExit(Collision col) {
-        if (col.gameObject.name == "Floor") {
+        if (col.gameObject.tag == "Floor") {
             isOnFloor = false;
         }
     }
