@@ -1,8 +1,10 @@
 using UnityEngine;
 
 public class Hook : MonoBehaviour {
+
+    #region Field
     [SerializeField]
-    private float speed = 0.2f;
+    private float speed = 1;
 
     private Rigidbody body;
     private Transform origin;
@@ -10,6 +12,7 @@ public class Hook : MonoBehaviour {
     private Player hooking;
     private Player hooked;
     private Pipeline cancel;
+    #endregion
 
     private void Awake() {
         body = GetComponent<Rigidbody>();
