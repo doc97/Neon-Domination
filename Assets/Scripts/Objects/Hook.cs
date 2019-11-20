@@ -8,6 +8,7 @@ public class Hook : MonoBehaviour {
 
     private Rigidbody body;
     private Transform origin;
+    private Transform rope;
     private bool reverse;
     private Player hooking;
     private Player hooked;
@@ -16,15 +17,12 @@ public class Hook : MonoBehaviour {
 
     private void Awake() {
         body = GetComponent<Rigidbody>();
+        rope = transform.Find("Rope");
     }
 
     private void Update() {
-        if (reverse) {
-            Vector3 newPosition = Vector3.MoveTowards(transform.position, origin.position, speed);
-            body.MovePosition(newPosition);
-        } else {
-            body.MovePosition(transform.position + transform.forward * speed);
-        }
+        UpdateHookPosition();
+        UpdateRopeLength();
 
         if (hooking.State.IsOff(Player.States.Hooking)) {
             Destroy();
@@ -42,6 +40,21 @@ public class Hook : MonoBehaviour {
         } else {
             Destroy();
         }
+    }
+
+    private void UpdateHookPosition() {
+        if (reverse) {
+            Vector3 newPosition = Vector3.MoveTowards(transform.position, origin.position, speed);
+            body.MovePosition(newPosition);
+        } else {
+            body.MovePosition(transform.position + transform.forward * speed);
+        }
+    }
+
+    private void UpdateRopeLength() {
+        float distance = Vector3.Distance(transform.position, origin.position);
+        Vector3 s = rope.transform.localScale;
+        rope.transform.localScale = new Vector3(s.x, s.y, distance);
     }
 
     private void Destroy() {

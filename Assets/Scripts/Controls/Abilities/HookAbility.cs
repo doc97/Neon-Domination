@@ -25,6 +25,7 @@ public class HookAbility : Ability {
         Quaternion rot = playerObj.transform.rotation * hookObj.transform.localRotation;
         Vector3 pos = playerObj.transform.position + hookObj.transform.localPosition + playerObj.transform.forward * 2;
         GameObject instance = GameObject.Instantiate(hookObj, pos, rot, GameObject.Find("_Dynamic").transform);
+        instance.GetComponent<Rigidbody>().freezeRotation = true;
         instance.GetComponent<Hook>().SetOrigin(playerObj.transform);
         instance.GetComponent<Hook>().SetCancelPipe(pipe);
         instance.SetActive(true);
