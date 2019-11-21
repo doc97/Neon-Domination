@@ -21,29 +21,29 @@ MonoBehaviour:
     value: 0
   color:
     overrideState: 1
-    value: {r: 0, g: 0, b: 0, a: 1}
+    value: {r: 0.74509805, g: 0, b: 0.6721406, a: 1}
   center:
     overrideState: 1
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.628
+    value: 0.535
   smoothness:
     overrideState: 1
-    value: 0.398
+    value: 0.182
   roundness:
     overrideState: 1
-    value: 0.666
+    value: 0.498
   rounded:
     overrideState: 1
-    value: 0
+    value: 1
   mask:
     overrideState: 1
     value: {fileID: 0}
     defaultState: 1
   opacity:
     overrideState: 1
-    value: 1
+    value: 0.597
 --- !u!114 &-2628204060706328852
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -56,20 +56,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6050e2d5de785ce4d931e4dbdbf2d755, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
   spectralLut:
-    overrideState: 1
+    overrideState: 0
     value: {fileID: 0}
     defaultState: 1
   intensity:
     overrideState: 1
-    value: 0.39
+    value: 0.066
   fastMode:
     overrideState: 1
-    value: 0
+    value: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,19 +145,19 @@ MonoBehaviour:
     value: 0.9
   softKnee:
     overrideState: 0
-    value: 0.5
+    value: 0.425
   clamp:
     overrideState: 0
     value: 65472
   diffusion:
-    overrideState: 0
-    value: 7
+    overrideState: 1
+    value: 5.58
   anamorphicRatio:
-    overrideState: 0
+    overrideState: 1
     value: 0
   color:
-    overrideState: 0
-    value: {r: 2, g: 2, b: 2, a: 1}
+    overrideState: 1
+    value: {r: 0, g: 1.6135367, b: 3.2056217, a: 1}
   fastMode:
     overrideState: 0
     value: 0
