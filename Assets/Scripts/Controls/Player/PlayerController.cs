@@ -5,8 +5,8 @@ public class PlayerController : MonoBehaviour {
     public enum MovementType {
         Strafe, Rotational
     }
-
-    private const int RESPAWN_Y_THRESHOLD = -80;
+    
+   
 
     #region Fields
     #region Serialized
@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour {
     private MovementType movementType = MovementType.Strafe;
     [SerializeField, Tooltip("World prefab storage")]
     private GameObject prefabs;
+    [SerializeField, Tooltip("Delay for respawning")]
+    private float RespawnDelay = 0.5f;
     #endregion
 
     private Vector3 spawnPosition;
@@ -93,7 +95,6 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         CheckFalling();
-        CheckRestart();
         Player.Update(Time.deltaTime);
     }
 
@@ -112,7 +113,6 @@ public class PlayerController : MonoBehaviour {
         if (col.gameObject.tag == "Floor") {
             isOnFloor = true;
         }
-
         bool isPlayer = col.gameObject.GetComponent<PlayerController>() != null;
         if (Player.State.IsOn(Player.States.Dashing) && isPlayer) {
             Push(col.gameObject);
@@ -121,8 +121,10 @@ public class PlayerController : MonoBehaviour {
         if (Player.State.IsOn(Player.States.Pushed)) {
             GetStunned();
         }
+        if (col.gameObject.tag =="DeathFloor"){
+            CheckRestart();
+        }
     }
-
     private void OnCollisionExit(Collision col) {
         if (col.gameObject.tag == "Floor") {
             isOnFloor = false;
@@ -139,15 +141,15 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void CheckRestart() {
-        if (transform.position.y < RESPAWN_Y_THRESHOLD) {
-            Rigidbody body = GetComponent<Rigidbody>();
-            body.velocity = Vector3.zero;
-            body.angularVelocity = Vector3.zero;
-            transform.rotation = spawnRotation;
-            transform.position = spawnPosition;
-        }
+        Rigidbody body = GetComponent<Rigidbody>();
+        body.velocity = Vector3.zero;
+        body.angularVelocity = Vector3.zero;
+        Invoke("Respawn", RespawnDelay);
     }
-
+    private void Respawn(){
+        transform.rotation = spawnRotation;
+        transform.position = spawnPosition;
+    }
     private void Push(GameObject target) {
         Rigidbody body = GetComponent<Rigidbody>();
         DashAbility dash = Player.GetAbility<DashAbility>();
