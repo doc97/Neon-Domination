@@ -8,19 +8,23 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PlayerEffectMat
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: eaccba147b8c2a8bcb3adc7b5b951fc4,
+    type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3050
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_65268BD0:
+        m_Texture: {fileID: 2800000, guid: 94f621b040edd2d019a9af012fb0faed, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -66,6 +70,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_1067F7F2: 1
+    - Vector1_79A94BB0: 0.6
+    - Vector1_EE9B5096: 0.1
+    - Vector1_F0CABEE2: 0.05
+    - Vector1_FA26B2E9: 3
     - _AlphaClip: 0
     - _Blend: 1
     - _BumpScale: 1
@@ -92,6 +101,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
+    - Color_CBB2CA3C: {r: 3.2941177, g: 3.2156863, b: 0, a: 0}
+    - Vector2_46AD1300: {r: 3, g: 3, b: 0, a: 0}
     - _BaseColor: {r: 0.14184403, g: 1, b: 0, a: 0.3529412}
     - _Color: {r: 0.14184403, g: 1, b: 0, a: 0.3529412}
     - _EmissionColor: {r: 0.09803922, g: 0.25, b: 0.10392157, a: 1}
