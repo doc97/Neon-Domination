@@ -138,6 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23e9585b0fd83424baaceb4b377137d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blueMaterial: {fileID: 2100000, guid: a1e301652aeef67d5a86e3a6a57111c8, type: 2}
+  redMaterial: {fileID: 2100000, guid: b5a69ff9b989d7a1f9175c69d16f457e, type: 2}
   speed: 1.5
 --- !u!1 &6615254563464731839
 GameObject:

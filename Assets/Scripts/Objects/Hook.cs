@@ -2,13 +2,21 @@ using UnityEngine;
 
 public class Hook : MonoBehaviour {
 
+    private Vector3 BLUE_COLOR = new Vector3(0, 191, 191);
+    private Vector3 RED_COLOR = new Vector3(191, 0, 0);
+
     #region Field
+    [SerializeField]
+    private Material blueMaterial;
+    [SerializeField]
+    private Material redMaterial;
     [SerializeField]
     private float speed = 1;
 
     private Rigidbody body;
     private Transform origin;
     private Transform rope;
+    private bool isBlue;
     private bool reverse;
     private Player hooking;
     private Player hooked;
@@ -74,5 +82,12 @@ public class Hook : MonoBehaviour {
 
     public void SetCancelPipe(Pipeline cancel) {
         this.cancel = cancel;
+    }
+
+    public void SetIsBlue(bool isBlue) {
+        MeshRenderer ropeMesh = transform.Find("Rope").Find("RopeAnchor").Find("RopeModel").GetComponent<MeshRenderer>();
+        MeshRenderer hookMesh = transform.Find("Hook").Find("HookModel").GetComponent<MeshRenderer>();
+        ropeMesh.material = isBlue ? blueMaterial : redMaterial;
+        hookMesh.materials[1] = isBlue ? blueMaterial : redMaterial;
     }
 }

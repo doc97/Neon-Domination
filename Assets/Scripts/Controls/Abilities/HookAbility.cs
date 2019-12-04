@@ -28,6 +28,7 @@ public class HookAbility : Ability {
         instance.GetComponent<Rigidbody>().freezeRotation = true;
         instance.GetComponent<Hook>().SetOrigin(playerObj.transform);
         instance.GetComponent<Hook>().SetCancelPipe(pipe);
+        instance.GetComponent<Hook>().SetIsBlue(player.IsBlue());
         instance.SetActive(true);
 
     }

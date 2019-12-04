@@ -209,4 +209,8 @@ public class PlayerController : MonoBehaviour {
         Player.State.On(Player.States.Stunned);
         G.Instance.Pipeline.New().Delay(gameplaySettings.StunDuration).Func(() => Player.State.Off(Player.States.Stunned));
     }
+
+    public bool IsBlue() {
+        return isBlue;
+    }
 }

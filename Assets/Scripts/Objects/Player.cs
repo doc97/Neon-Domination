@@ -80,4 +80,8 @@ public class Player {
         }
         return null;
     }
+
+    public bool IsBlue() {
+        return controller.IsBlue();
+    }
 }
