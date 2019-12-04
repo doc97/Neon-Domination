@@ -193,6 +193,11 @@ PrefabInstance:
       propertyPath: settings
       value: 
       objectReference: {fileID: 388673129}
+    - target: {fileID: 4510619278895969211, guid: 58b3fe92571c71149b173db865aaca60,
+        type: 3}
+      propertyPath: matchBarObject
+      value: 
+      objectReference: {fileID: 592100186}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58b3fe92571c71149b173db865aaca60, type: 3}
 --- !u!4 &82379803 stripped
@@ -278,6 +283,11 @@ PrefabInstance:
       propertyPath: ImpactParticle
       value: 
       objectReference: {fileID: 1696610059}
+    - target: {fileID: 4720815393050686858, guid: 20f87e355d3b4ec4497cb70c592e39fb,
+        type: 3}
+      propertyPath: matchBarObject
+      value: 
+      objectReference: {fileID: 592100186}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20f87e355d3b4ec4497cb70c592e39fb, type: 3}
 --- !u!4 &233453903 stripped
@@ -588,6 +598,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46f2cb7bdb72c8742a87f4b963565a6a, type: 3}
+--- !u!1 &592100186 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7167968241246494808, guid: 46f2cb7bdb72c8742a87f4b963565a6a,
+    type: 3}
+  m_PrefabInstance: {fileID: 592100185}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &608743117
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +774,11 @@ PrefabInstance:
       propertyPath: ImpactParticle
       value: 
       objectReference: {fileID: 1207505512}
+    - target: {fileID: 3006154410196339855, guid: 91fcbc32e1a75b04ebc6fde3d20a5f14,
+        type: 3}
+      propertyPath: matchBarObject
+      value: 
+      objectReference: {fileID: 592100186}
     - target: {fileID: 302566390465658126, guid: 91fcbc32e1a75b04ebc6fde3d20a5f14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1609,6 +1630,11 @@ PrefabInstance:
       propertyPath: ImpactParticle
       value: 
       objectReference: {fileID: 1161267542}
+    - target: {fileID: 6180811740375923097, guid: 98c442f040c82cd46a09eeddeba0f5cc,
+        type: 3}
+      propertyPath: matchBarObject
+      value: 
+      objectReference: {fileID: 592100186}
     - target: {fileID: 7256211213627608908, guid: 98c442f040c82cd46a09eeddeba0f5cc,
         type: 3}
       propertyPath: m_Materials.Array.size
