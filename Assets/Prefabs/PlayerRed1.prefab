@@ -7,16 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4909878865204105815, guid: d92eae0ca1b69d2489b207e4405186e7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4909878865204105815, guid: d92eae0ca1b69d2489b207e4405186e7,
-        type: 3}
-      propertyPath: m_Name
-      value: Effect
-      objectReference: {fileID: 0}
     - target: {fileID: 5037309273628767111, guid: d92eae0ca1b69d2489b207e4405186e7,
         type: 3}
       propertyPath: m_Name
@@ -97,5 +87,26 @@ PrefabInstance:
       propertyPath: dashBinding
       value: Dash3
       objectReference: {fileID: 0}
+    - target: {fileID: 3106262069048672044, guid: d92eae0ca1b69d2489b207e4405186e7,
+        type: 3}
+      propertyPath: ImpactParticle
+      value: 
+      objectReference: {fileID: 779449484433008096}
+    - target: {fileID: 4909878865204105815, guid: d92eae0ca1b69d2489b207e4405186e7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909878865204105815, guid: d92eae0ca1b69d2489b207e4405186e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Effect
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92eae0ca1b69d2489b207e4405186e7, type: 3}
+--- !u!1 &779449484433008096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2256991279043357047, guid: d92eae0ca1b69d2489b207e4405186e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1550180214505802903}
+  m_PrefabAsset: {fileID: 0}

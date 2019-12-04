@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour {
     private GameObject prefabs;
     [SerializeField, Tooltip("Delay for respawning")]
     private float RespawnDelay = 0.5f;
+    [SerializeField]
+    private GameObject ImpactParticle;
     #endregion
 
     private Vector3 spawnPosition;
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour {
 
         gameplaySettings = settings.GetComponent<Settings>()?.Gameplay ?? new GameplaySettings();
         Player.Initialize(gameObject, hookPrefab, bindings, movementSettings, gameplaySettings);
+        ImpactParticle.GetComponent<Renderer>().enabled = false;
     }
 
     private void Update() {
@@ -116,10 +119,14 @@ public class PlayerController : MonoBehaviour {
         bool isPlayer = col.gameObject.GetComponent<PlayerController>() != null;
         if (Player.State.IsOn(Player.States.Dashing) && isPlayer) {
             Push(col.gameObject);
+            ImpactParticle.GetComponent<Renderer>().enabled = true;
+            ImpactParticle.GetComponent<ParticleSystem>().Play();
+            
         }
 
         if (Player.State.IsOn(Player.States.Pushed)) {
             GetStunned();
+            
         }
         if (col.gameObject.tag =="DeathFloor"){
             CheckRestart();
