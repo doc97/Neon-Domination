@@ -16,6 +16,7 @@ public class Player {
     private Ability[] abilities;
     private InputBindings bindings;
 
+    private PlayerController controller;
     private GameObject effect;
     private Orb orb;
     #endregion
@@ -28,6 +29,7 @@ public class Player {
         };
         effect = player.transform.Find("Effect").gameObject;
         effect.SetActive(false);
+        controller = player.GetComponent<PlayerController>();
     }
 
     public void Update(float deltaTime) {
@@ -60,12 +62,14 @@ public class Player {
     public void PickupOrb(Orb orb) {
         effect.SetActive(true);
         this.orb = orb;
+        controller.OnOrbPickup();
     }
 
     public void DropOrb(Vector3? position) {
         effect.SetActive(false);
         orb?.Spawn(position);
         orb = null;
+        controller.OnOrbDrop();
     }
 
     public T GetAbility<T>() where T : Ability {

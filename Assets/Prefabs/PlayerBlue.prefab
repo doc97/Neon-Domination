@@ -159,11 +159,13 @@ MonoBehaviour:
   verticalBinding: 
   hookBinding: 
   dashBinding: 
+  isBlue: 1
   maxSpeed: 16
   acceleration: 12
   movementType: 0
   prefabs: {fileID: 8726516814819014684, guid: 5aaf6fd956a69f644a018b833d4d1c00, type: 3}
   RespawnDelay: 0.5
+  matchBarObject: {fileID: 0}
 --- !u!1001 &2462479440656026206
 PrefabInstance:
   m_ObjectHideFlags: 0

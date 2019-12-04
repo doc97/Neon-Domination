@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 public class PlayerController : MonoBehaviour {
@@ -6,14 +7,11 @@ public class PlayerController : MonoBehaviour {
         Strafe, Rotational
     }
     
-   
-
     #region Fields
     #region Serialized
     [Header("Configuration")]
     [SerializeField]
     private GameObject settings;
-
     [Header("Controls")]
     [SerializeField]
     private string horizontalBinding;
@@ -25,6 +23,8 @@ public class PlayerController : MonoBehaviour {
     private string dashBinding;
     
     [Header("Other")]
+    [SerializeField]
+    private bool isBlue;
     [SerializeField, Tooltip("Units per second")]
     private float maxSpeed;
     [SerializeField]
@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour {
     private float RespawnDelay = 0.5f;
     [SerializeField]
     private GameObject ImpactParticle;
+    [SerializeField]
+    private GameObject matchBarObject;
     #endregion
 
     private Vector3 spawnPosition;
@@ -68,6 +70,7 @@ public class PlayerController : MonoBehaviour {
     public Player Player { get; } = new Player();
 
     private bool isOnFloor;
+    private MatchBar matchBar;
     #endregion
 
     private void Awake() {
@@ -85,6 +88,8 @@ public class PlayerController : MonoBehaviour {
 
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
+
+        matchBar = matchBarObject.GetComponent<MatchBar>();
     }
 
     private void Start() {
@@ -153,10 +158,27 @@ public class PlayerController : MonoBehaviour {
         body.angularVelocity = Vector3.zero;
         Invoke("Respawn", RespawnDelay);
     }
-    private void Respawn(){
+
+    public void OnOrbPickup() {
+        StartCoroutine("AddScore");
+    }
+
+    public void OnOrbDrop() {
+        StopCoroutine("AddScore");
+    }
+
+    private IEnumerator AddScore() {
+        while (true) {
+            matchBar.Score += isBlue ? 1 : -1;
+            yield return new WaitForSeconds(0.25f);
+        }
+    }
+
+    private void Respawn() {
         transform.rotation = spawnRotation;
         transform.position = spawnPosition;
     }
+
     private void Push(GameObject target) {
         Rigidbody body = GetComponent<Rigidbody>();
         DashAbility dash = Player.GetAbility<DashAbility>();
