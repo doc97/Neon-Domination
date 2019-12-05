@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Orb : MonoBehaviour {
 
-    private const float DROP_COOLDOWN_SEC = 1.5f;
+    private const float DROP_COOLDOWN_SEC = 0.0f;
 
     #region Fields
     private Vector3 spawnPosition;
