@@ -173,11 +173,15 @@ MonoBehaviour:
   verticalBinding: 
   hookBinding: 
   dashBinding: 
+  isBlue: 0
   maxSpeed: 16
   acceleration: 12
   movementType: 0
   prefabs: {fileID: 8726516814819014684, guid: 5aaf6fd956a69f644a018b833d4d1c00, type: 3}
   RespawnDelay: 0.5
+  ImpactParticle: {fileID: 2256991279043357047}
+  dissolveMaterial: {fileID: 2100000, guid: 35e8e339906fbf0cc8b5b1b7e8e78a46, type: 2}
+  matchBarObject: {fileID: 0}
 --- !u!1001 &4894272803968427447
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,7 +192,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 919934f3f74c79db2b82fe6593e4b417,
         type: 3}
       propertyPath: m_Name
-      value: NeoPlayer2
+      value: NeoPlayer
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 919934f3f74c79db2b82fe6593e4b417,
         type: 3}
@@ -308,6 +312,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8316790df91e98f4085388b2a23510cb, type: 3}
+--- !u!1 &2256991279043357047 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8583042129580256088, guid: 8316790df91e98f4085388b2a23510cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7516339328144851503}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &698892897780737503 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7060959943894820848, guid: 8316790df91e98f4085388b2a23510cb,

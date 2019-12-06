@@ -72,9 +72,12 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _progress: -0.12
+    - _thickness: 0.001
     m_Colors:
     - Color_A4530A1: {r: 2.3249831, g: 0.98074627, b: 0, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 191, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _emission_color: {r: 0, g: 2.9960785, b: 2.9960785, a: 1}

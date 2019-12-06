@@ -280,11 +280,6 @@ PrefabInstance:
       objectReference: {fileID: 388673129}
     - target: {fileID: 4720815393050686858, guid: 20f87e355d3b4ec4497cb70c592e39fb,
         type: 3}
-      propertyPath: ImpactParticle
-      value: 
-      objectReference: {fileID: 1696610059}
-    - target: {fileID: 4720815393050686858, guid: 20f87e355d3b4ec4497cb70c592e39fb,
-        type: 3}
       propertyPath: matchBarObject
       value: 
       objectReference: {fileID: 592100186}
@@ -602,15 +597,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1304571568930865657, guid: 46f2cb7bdb72c8742a87f4b963565a6a,
-        type: 3}
-      propertyPath: m_Name
-      value: Background
-      objectReference: {fileID: 0}
     - target: {fileID: 7167968240063939041, guid: 46f2cb7bdb72c8742a87f4b963565a6a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1304571568930865657, guid: 46f2cb7bdb72c8742a87f4b963565a6a,
+        type: 3}
+      propertyPath: m_Name
+      value: Background
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46f2cb7bdb72c8742a87f4b963565a6a, type: 3}
@@ -785,11 +780,6 @@ PrefabInstance:
       propertyPath: settings
       value: 
       objectReference: {fileID: 388673129}
-    - target: {fileID: 3006154410196339855, guid: 91fcbc32e1a75b04ebc6fde3d20a5f14,
-        type: 3}
-      propertyPath: ImpactParticle
-      value: 
-      objectReference: {fileID: 1207505512}
     - target: {fileID: 3006154410196339855, guid: 91fcbc32e1a75b04ebc6fde3d20a5f14,
         type: 3}
       propertyPath: matchBarObject
@@ -1059,18 +1049,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035933973}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1161267542 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1028029496961041585, guid: 98c442f040c82cd46a09eeddeba0f5cc,
-    type: 3}
-  m_PrefabInstance: {fileID: 2028565649}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1207505512 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2157744268563241684, guid: 91fcbc32e1a75b04ebc6fde3d20a5f14,
-    type: 3}
-  m_PrefabInstance: {fileID: 709734136}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1308290982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,7 +1176,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1575,6 +1553,11 @@ PrefabInstance:
       propertyPath: blendDistance
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8802462475471938489, guid: e3bda13ae31d4e042ae026e29dd9584c,
+        type: 3}
+      propertyPath: weight
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3bda13ae31d4e042ae026e29dd9584c, type: 3}
 --- !u!4 &1633664181 stripped
@@ -1582,12 +1565,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8802462474535388697, guid: e3bda13ae31d4e042ae026e29dd9584c,
     type: 3}
   m_PrefabInstance: {fileID: 1633664180}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1696610059 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 779449484433008096, guid: 58b3fe92571c71149b173db865aaca60,
-    type: 3}
-  m_PrefabInstance: {fileID: 82379802}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2028565649
 PrefabInstance:
@@ -1663,14 +1640,14 @@ PrefabInstance:
       objectReference: {fileID: 388673129}
     - target: {fileID: 6180811740375923097, guid: 98c442f040c82cd46a09eeddeba0f5cc,
         type: 3}
-      propertyPath: ImpactParticle
-      value: 
-      objectReference: {fileID: 1161267542}
-    - target: {fileID: 6180811740375923097, guid: 98c442f040c82cd46a09eeddeba0f5cc,
-        type: 3}
       propertyPath: matchBarObject
       value: 
       objectReference: {fileID: 592100186}
+    - target: {fileID: 6180811740375923097, guid: 98c442f040c82cd46a09eeddeba0f5cc,
+        type: 3}
+      propertyPath: RespawnDelay
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7256211213627608908, guid: 98c442f040c82cd46a09eeddeba0f5cc,
         type: 3}
       propertyPath: m_Materials.Array.size

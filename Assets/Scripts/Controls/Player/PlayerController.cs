@@ -31,18 +31,22 @@ public class PlayerController : MonoBehaviour {
     private float acceleration;
     [SerializeField]
     private MovementType movementType = MovementType.Strafe;
+    [SerializeField, Tooltip("Respawn duration in seconds")]
+    private float respawnDuration = 1;
     [SerializeField, Tooltip("World prefab storage")]
     private GameObject prefabs;
-    [SerializeField, Tooltip("Delay for respawning")]
-    private float RespawnDelay = 0.5f;
     [SerializeField]
     private GameObject ImpactParticle;
+    [SerializeField]
+    private Material dissolveMaterial;
     [SerializeField]
     private GameObject matchBarObject;
     #endregion
 
     private Vector3 spawnPosition;
     private Quaternion spawnRotation;
+    private Material[] initialMaterials;
+    private Material[] respawnMaterials;
 
     #region Movement
     private StrafeMovement strafeScheme;
@@ -88,6 +92,8 @@ public class PlayerController : MonoBehaviour {
 
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
+        initialMaterials = transform.Find("NeoPlayer").GetComponent<MeshRenderer>().materials;
+        respawnMaterials = new Material[initialMaterials.Length];
 
         matchBar = matchBarObject.GetComponent<MatchBar>();
     }
@@ -99,6 +105,12 @@ public class PlayerController : MonoBehaviour {
         gameplaySettings = settings.GetComponent<Settings>()?.Gameplay ?? new GameplaySettings();
         Player.Initialize(gameObject, hookPrefab, bindings, movementSettings, gameplaySettings);
         ImpactParticle.GetComponent<Renderer>().enabled = false;
+
+        Material respawnMaterial = new Material(dissolveMaterial);
+        respawnMaterial.SetColor("_emission_color", Player.IsBlue() ? Colors.BLUE_COLOR : Colors.RED_COLOR);
+        for (int i = 0; i < respawnMaterials.Length; i++) {
+            respawnMaterials[i] = respawnMaterial;
+        }
     }
 
     private void Update() {
@@ -133,8 +145,9 @@ public class PlayerController : MonoBehaviour {
             GetStunned();
             
         }
-        if (col.gameObject.tag =="DeathFloor"){
-            CheckRestart();
+
+        if (col.gameObject.tag =="DeathFloor") {
+            StartRestart();
         }
     }
     private void OnCollisionExit(Collision col) {
@@ -153,11 +166,34 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void CheckRestart() {
+    private void StartRestart() {
         Rigidbody body = GetComponent<Rigidbody>();
         body.velocity = Vector3.zero;
         body.angularVelocity = Vector3.zero;
-        Invoke("Respawn", RespawnDelay);
+        MeshRenderer mesh = transform.Find("NeoPlayer").GetComponent<MeshRenderer>();
+        mesh.materials = respawnMaterials;
+        StartCoroutine("UpdateRespawn", mesh);
+    }
+
+    private IEnumerator UpdateRespawn(MeshRenderer mesh) {
+        // Note: Don't use 0, it results in weird glow of the gun material
+        float value = 0.0001f;
+        while (value < 1) {
+            foreach (Material mat in mesh.materials) {
+                mat.SetFloat("_progress", value);
+            }
+            value += Time.deltaTime / respawnDuration;
+            yield return null;
+        }
+        Respawn();
+        StopAllCoroutines();
+    }
+
+    private void Respawn() {
+        transform.rotation = spawnRotation;
+        transform.position = spawnPosition;
+        MeshRenderer mesh = transform.Find("NeoPlayer").GetComponent<MeshRenderer>();
+        mesh.materials = initialMaterials;
     }
 
     public void OnOrbPickup() {
@@ -173,11 +209,6 @@ public class PlayerController : MonoBehaviour {
             matchBar.Score += isBlue ? 1 : -1;
             yield return new WaitForSeconds(0.25f);
         }
-    }
-
-    private void Respawn() {
-        transform.rotation = spawnRotation;
-        transform.position = spawnPosition;
     }
 
     private void Push(GameObject target) {

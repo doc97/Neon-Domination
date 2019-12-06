@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class Hook : MonoBehaviour {
 
-    private Vector3 BLUE_COLOR = new Vector3(0, 191, 191);
-    private Vector3 RED_COLOR = new Vector3(191, 0, 0);
-
     #region Field
     [SerializeField]
     private Material blueMaterial;
