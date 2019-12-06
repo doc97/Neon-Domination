@@ -6,7 +6,7 @@ public class MatchBar : MonoBehaviour {
 
     #region Constants
     private const float MAX_SCORE = 100;
-    private const int SIDE_WIDTH_PX = 430;
+    private const int SIDE_WIDTH_PX = 270;
     #endregion
 
     #region Fields
