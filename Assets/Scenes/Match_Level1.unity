@@ -1525,10 +1525,35 @@ PrefabInstance:
       propertyPath: players
       value: 
       objectReference: {fileID: 785717666}
+    - target: {fileID: 8802462474535388696, guid: e3bda13ae31d4e042ae026e29dd9584c,
+        type: 3}
+      propertyPath: offset.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802462474535388696, guid: e3bda13ae31d4e042ae026e29dd9584c,
+        type: 3}
+      propertyPath: zoom
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802462474535388696, guid: e3bda13ae31d4e042ae026e29dd9584c,
+        type: 3}
+      propertyPath: centerOffset.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802462474535388696, guid: e3bda13ae31d4e042ae026e29dd9584c,
+        type: 3}
+      propertyPath: lerpSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8802462474535388702, guid: e3bda13ae31d4e042ae026e29dd9584c,
         type: 3}
       propertyPath: far clip plane
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802462474535388702, guid: e3bda13ae31d4e042ae026e29dd9584c,
+        type: 3}
+      propertyPath: field of view
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8802462475471938489, guid: e3bda13ae31d4e042ae026e29dd9584c,
         type: 3}
