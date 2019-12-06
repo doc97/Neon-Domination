@@ -560,7 +560,7 @@ PrefabInstance:
     - target: {fileID: 7167968241246494809, guid: 46f2cb7bdb72c8742a87f4b963565a6a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -120
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 7167968241246494809, guid: 46f2cb7bdb72c8742a87f4b963565a6a,
         type: 3}
@@ -601,6 +601,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1304571568930865657, guid: 46f2cb7bdb72c8742a87f4b963565a6a,
+        type: 3}
+      propertyPath: m_Name
+      value: Background
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46f2cb7bdb72c8742a87f4b963565a6a, type: 3}
