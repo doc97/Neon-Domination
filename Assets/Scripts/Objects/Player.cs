@@ -34,6 +34,7 @@ public class Player {
 
     public void Update(float deltaTime) {
         UpdateAim();
+        UpdateDashing();
         UpdateAbilities(deltaTime);
     }
 
@@ -58,6 +59,18 @@ public class Player {
             if (NDInput.IsButtonDown(ability.InputName)) {
                 ability.OnButtonBeingDown();
             }
+        }
+    }
+
+    private void UpdateDashing() {
+        Rigidbody body = controller.transform.GetComponent<Rigidbody>();
+        bool isDashing = State.IsOn(States.Dashing);
+
+        // Disable gravity while player is dashing
+        body.useGravity = !isDashing;
+
+        if (isDashing) {
+            body.velocity = new Vector3(body.velocity.x, 0, body.velocity.z);
         }
     }
 
