@@ -1,6 +1,7 @@
 using System;
 
 public abstract class Ability {
+
     #region Fields
     public string Name { get; }
     public float Cooldown { get; protected set; }
@@ -13,6 +14,10 @@ public abstract class Ability {
         Cooldown = cooldown;
         InputName = inputName;
     }
+
+    public virtual void OnButtonDown() {}
+    public virtual void OnButtonUp() {}
+    public virtual void OnButtonBeingDown() {}
 
     public virtual void Update(float deltaTime) {
         Timer = Math.Max(0, Timer - deltaTime);

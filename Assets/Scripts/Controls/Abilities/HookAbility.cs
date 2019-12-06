@@ -13,6 +13,10 @@ public class HookAbility : Ability {
         this.hookObj = hookObj;
     }
 
+    public override void OnButtonDown() {
+        Activate();
+    }
+
     protected override void ActivateImpl() {
         Logger.Logf("Ability ({0}): activated", Name);
 
@@ -30,7 +34,6 @@ public class HookAbility : Ability {
         instance.GetComponent<Hook>().SetCancelPipe(pipe);
         instance.GetComponent<Hook>().SetIsBlue(player.IsBlue());
         instance.SetActive(true);
-
     }
 
     protected override bool CanActivateImpl() {

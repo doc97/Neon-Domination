@@ -16,4 +16,14 @@ public class NDInput {
         try { return Input.GetButtonDown(inputName); }
         catch (ArgumentException) { return false; }
     }
+
+    public static bool GetButtonUp(string inputName) {
+        try { return Input.GetButtonUp(inputName); }
+        catch (ArgumentException) { return false; }
+    }
+
+    public static bool IsButtonDown(string inputName) {
+        try { return Input.GetButton(inputName); }
+        catch (ArgumentException) { return false; }
+    }
 }

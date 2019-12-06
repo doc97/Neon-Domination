@@ -51,10 +51,12 @@ public class Player {
         foreach (Ability ability in abilities) {
             ability.Update(deltaTime);
             if (NDInput.GetButtonDown(ability.InputName)) {
-                if (ability.IsOnCooldown()) {
-                    Logger.Logf("Cooldown: {0}", ability.Timer);
-                }
-                ability.Activate();
+                ability.OnButtonDown();
+            } else if (NDInput.GetButtonUp(ability.InputName)) {
+                ability.OnButtonUp();
+            }
+            if (NDInput.IsButtonDown(ability.InputName)) {
+                ability.OnButtonBeingDown();
             }
         }
     }

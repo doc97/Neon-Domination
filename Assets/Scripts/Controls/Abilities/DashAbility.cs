@@ -16,6 +16,10 @@ public class DashAbility : Ability {
         Force = force;
     }
 
+    public override void OnButtonDown() {
+        Activate();
+    }
+
     protected override void ActivateImpl() {
         Logger.Logf("Ability ({0}): activated", Name);
         playerObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
