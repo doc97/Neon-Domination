@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using TMPro;
 
 public class MatchBar : MonoBehaviour {
 
@@ -21,30 +20,40 @@ public class MatchBar : MonoBehaviour {
         }
     }
 
+    private int _redScore;
+    public int RedScore {
+        get => _redScore;
+        set {
+            _redScore = value;
+            blueScoreText.text = "" + _redScore;
+        }
+    }
+
+    private int _blueScore;
+    public int BlueScore {
+        get => _blueScore;
+        set {
+            _blueScore = value;
+            blueScoreText.text = "" + _blueScore;
+        }
+    }
+
     private RectTransform indicator;
     private Animator indicatorAnim;
+    private TextMeshProUGUI redScoreText;
+    private TextMeshProUGUI blueScoreText;
     #endregion
 
     private void Awake() {
         indicator = transform.Find("Indicator").GetComponent<RectTransform>();
         indicatorAnim = indicator.GetComponent<Animator>();
+        redScoreText = transform.Find("RedScore").GetComponent<TextMeshProUGUI>();
+        blueScoreText = transform.Find("BlueScore").GetComponent<TextMeshProUGUI>();
     }
 
     private void Start() {
         Score = 0;
-        //StartCoroutine(UpdateScore());
-    }
-
-    private IEnumerator UpdateScore() {
-        System.Random rand = new System.Random();
-        while(true) {
-            bool add = rand.Next(100) < 50;
-            int count = rand.Next(10);
-            int counter = 0;
-            while (counter++ < count) {
-                Score += add ? 1 : -1;
-                yield return new WaitForSeconds(0.25f);
-            }
-        }
+        redScoreText.text = "0";
+        blueScoreText.text = "0";
     }
 }
