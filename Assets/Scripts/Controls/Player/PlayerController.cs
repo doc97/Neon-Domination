@@ -150,7 +150,6 @@ public class PlayerController : MonoBehaviour {
 
         if (Player.State.IsOn(Player.States.Pushed)) {
             GetStunned();
-            
         }
 
         if (col.gameObject.tag =="DeathFloor") {

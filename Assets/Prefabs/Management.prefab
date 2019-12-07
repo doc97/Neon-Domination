@@ -46,7 +46,7 @@ MonoBehaviour:
   dashCooldown: 2.5
   dashForce: 80
   hookCooldown: 3
-  stunDuration: 2.5
+  stunDuration: 1.5
 --- !u!1 &2591783400579198968
 GameObject:
   m_ObjectHideFlags: 0
