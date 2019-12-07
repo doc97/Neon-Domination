@@ -41,8 +41,19 @@ public class PlayerController : MonoBehaviour {
     private Material dissolveMaterial;
     [SerializeField]
     private GameObject matchBarObject;
+
+
+    [Header("SFX")]
+    [SerializeField]
+    private AudioClip ImpactClip;
+    [SerializeField]
+    private AudioClip DashClip;
+    [SerializeField] 
+    private AudioClip HookClip;  
+
     #endregion
 
+    AudioSource audio; 
     private Vector3 spawnPosition;
     private Quaternion spawnRotation;
     private Material[] initialMaterials;
@@ -99,6 +110,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Start() {
+        audio = GetComponent<AudioSource>();
+
         GameObject hookPrefab = prefabs.transform.Find("Hook")?.gameObject;
         Assert.IsNotNull(hookPrefab, "No Hook prefab exists!");
 
@@ -237,6 +250,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void GetStunned() {
+        audio.clip = ImpactClip;
+        audio.Play();
         Player.State.Off(Player.States.Pushed);
         Player.State.On(Player.States.Stunned);
         G.Instance.Pipeline.New().Delay(gameplaySettings.StunDuration).Func(() => Player.State.Off(Player.States.Stunned));

@@ -3,7 +3,6 @@ using UnityEngine;
 public class Orb : MonoBehaviour {
 
     private const float DROP_COOLDOWN_SEC = 0.0f;
-
     #region Fields
     private Vector3 spawnPosition;
     private bool active;
@@ -27,6 +26,8 @@ public class Orb : MonoBehaviour {
         Player player = col.gameObject.GetComponentInParent<PlayerController>()?.Player;
         if (active && player != null) {
             player.PickupOrb(this);
+            AudioSource OrbSound = GetComponent<AudioSource>(); 
+            OrbSound.Play();
             // To avoid multiple players picking up the orb, it is deactivated
             active = false;
             transform.position = new Vector3(0, 100, 0);
