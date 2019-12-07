@@ -9,12 +9,14 @@ public sealed class G {
     public static G Instance { get => instance; }
 
     public PipelineManager Pipeline { get; }
+    public RoundManager Round { get; }
     #endregion
 
     static G() {}
 
     private G() {
         Pipeline = new PipelineManager();
+        Round = new RoundManager();
     }
 
     public void Update(float deltaTime) {

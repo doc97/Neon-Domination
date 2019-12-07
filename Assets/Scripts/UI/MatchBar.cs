@@ -4,19 +4,18 @@ using TMPro;
 public class MatchBar : MonoBehaviour {
 
     #region Constants
-    private const float MAX_SCORE = 100;
-    private const int SIDE_WIDTH_PX = 270;
+    private const int SIDE_WIDTH_PX = 520;
     #endregion
 
     #region Fields
-    private float _score;
-    public float Score {
-        get => _score;
+    private float _points;
+    public float Points {
+        get => _points;
         set {
-            _score = Mathf.Max(Mathf.Min(value, MAX_SCORE), -MAX_SCORE);
-            float indicatorX = _score / MAX_SCORE * SIDE_WIDTH_PX;
+            _points = value;
+            float indicatorX = _points / RoundManager.POINTS_TO_SCORE * SIDE_WIDTH_PX;
             indicator.localPosition = new Vector3(indicatorX, indicator.localPosition.y, indicator.localPosition.z);
-            indicatorAnim.SetInteger("score", (int)_score);
+            indicatorAnim.SetInteger("score", (int)_points);
         }
     }
 
@@ -49,10 +48,11 @@ public class MatchBar : MonoBehaviour {
         indicatorAnim = indicator.GetComponent<Animator>();
         redScoreText = transform.Find("RedScore").GetComponent<TextMeshProUGUI>();
         blueScoreText = transform.Find("BlueScore").GetComponent<TextMeshProUGUI>();
+        G.Instance.Round.SetMatchBar(this);
     }
 
     private void Start() {
-        Score = 0;
+        Points = 0;
         redScoreText.text = "0";
         blueScoreText.text = "0";
     }

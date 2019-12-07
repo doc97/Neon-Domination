@@ -39,9 +39,6 @@ public class PlayerController : MonoBehaviour {
     private GameObject ImpactParticle;
     [SerializeField]
     private Material dissolveMaterial;
-    [SerializeField]
-    private GameObject matchBarObject;
-
 
     [Header("SFX")]
     [SerializeField]
@@ -53,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 
     #endregion
 
-    AudioSource audio; 
+    private AudioSource sfx;
     private Vector3 spawnPosition;
     private Quaternion spawnRotation;
     private Material[] initialMaterials;
@@ -85,7 +82,6 @@ public class PlayerController : MonoBehaviour {
     public Player Player { get; } = new Player();
 
     private bool isOnFloor;
-    private MatchBar matchBar;
     #endregion
 
     private void Awake() {
@@ -105,12 +101,10 @@ public class PlayerController : MonoBehaviour {
         spawnRotation = transform.rotation;
         initialMaterials = transform.Find("NeoPlayer").GetComponent<MeshRenderer>().materials;
         respawnMaterials = new Material[initialMaterials.Length];
-
-        matchBar = matchBarObject.GetComponent<MatchBar>();
     }
 
     private void Start() {
-        audio = GetComponent<AudioSource>();
+        sfx = GetComponent<AudioSource>();
 
         GameObject hookPrefab = prefabs.transform.Find("Hook")?.gameObject;
         Assert.IsNotNull(hookPrefab, "No Hook prefab exists!");
@@ -219,7 +213,7 @@ public class PlayerController : MonoBehaviour {
 
     private IEnumerator AddScore() {
         while (true) {
-            matchBar.Score += isBlue ? 1 : -1;
+            G.Instance.Round.AddPoint(isBlue);
             yield return new WaitForSeconds(0.25f);
         }
     }
@@ -250,8 +244,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void GetStunned() {
-        audio.clip = ImpactClip;
-        audio.Play();
+        sfx.clip = ImpactClip;
+        sfx.Play();
         Player.State.Off(Player.States.Pushed);
         Player.State.On(Player.States.Stunned);
         G.Instance.Pipeline.New().Delay(gameplaySettings.StunDuration).Func(() => Player.State.Off(Player.States.Stunned));
