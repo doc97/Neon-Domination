@@ -13,7 +13,9 @@ public class MatchBar : MonoBehaviour {
         get => _points;
         set {
             _points = value;
-            float indicatorX = _points / RoundManager.POINTS_TO_SCORE * SIDE_WIDTH_PX;
+            float percentage = Mathf.Abs(_points / RoundManager.POINTS_TO_SCORE);
+            float xPosition = (float) NDMath.SmoothStopN(percentage, 2) * Mathf.Sign(_points);
+            float indicatorX = xPosition * SIDE_WIDTH_PX;
             indicator.localPosition = new Vector3(indicatorX, indicator.localPosition.y, indicator.localPosition.z);
             indicatorAnim.SetInteger("score", (int)_points);
         }
