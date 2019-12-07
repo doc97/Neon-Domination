@@ -145,6 +145,8 @@ public class PlayerController : MonoBehaviour {
             Push(col.gameObject);
             ImpactParticle.GetComponent<Renderer>().enabled = true;
             ImpactParticle.GetComponent<ParticleSystem>().Play();
+            sfx.clip = ImpactClip;
+            sfx.Play();
             
         }
 
@@ -243,8 +245,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void GetStunned() {
-        sfx.clip = ImpactClip;
-        sfx.Play();
         Player.State.Off(Player.States.Pushed);
         Player.State.On(Player.States.Stunned);
         G.Instance.Pipeline.New().Delay(gameplaySettings.StunDuration).Func(() => Player.State.Off(Player.States.Stunned));
