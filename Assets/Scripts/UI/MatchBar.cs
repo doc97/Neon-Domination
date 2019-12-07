@@ -55,7 +55,7 @@ public class MatchBar : MonoBehaviour {
 
     private void Start() {
         Points = 0;
-        redScoreText.text = "0";
-        blueScoreText.text = "0";
+        redScoreText.text = "" + G.Instance.Round.RedScore;
+        blueScoreText.text = "" + G.Instance.Round.BlueScore;
     }
 }

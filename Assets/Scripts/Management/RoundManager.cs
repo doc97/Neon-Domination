@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.SceneManagement;
 
 public class RoundManager {
 
@@ -63,7 +64,7 @@ public class RoundManager {
 
     private void Restart() {
         Points = 0;
-        // Respawn player's and orb
+        SceneManager.LoadScene("Match_Level1");
     }
 
     public void SetMatchBar(MatchBar bar) {
