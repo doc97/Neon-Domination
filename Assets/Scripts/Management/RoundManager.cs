@@ -64,6 +64,13 @@ public class RoundManager {
 
     private void Restart() {
         Points = 0;
+        
+        // Restart match (best of 3)
+        if (RedScore + BlueScore == 3) {
+            RedScore = 0;
+            BlueScore = 0;
+        }
+
         SceneManager.LoadScene("Match_Level1");
     }
 
