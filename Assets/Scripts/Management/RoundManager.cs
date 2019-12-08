@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class RoundManager {
 
+    public enum RoundWinner { None, Blue, Red }
+
     #region Constants
     public const int POINTS_TO_SCORE = 100;
     #endregion
@@ -34,6 +36,9 @@ public class RoundManager {
         }
     }
 
+    public int RoundNumber { get => BlueScore + RedScore; }
+    public RoundWinner LastWinner { get; private set; } = RoundWinner.None;
+
     private MatchBar bar;
     #endregion
 
@@ -46,6 +51,7 @@ public class RoundManager {
     }
 
     private void AddBluePoint() {
+        LastWinner = RoundWinner.Blue;
         Points++;
 
         if (Points == POINTS_TO_SCORE) {
@@ -55,6 +61,7 @@ public class RoundManager {
     }
 
     private void AddRedPoint() {
+        LastWinner = RoundWinner.Red;
         Points--;
 
         if (Points == -POINTS_TO_SCORE) {
@@ -70,9 +77,10 @@ public class RoundManager {
         if (RedScore + BlueScore == 3) {
             RedScore = 0;
             BlueScore = 0;
+            LastWinner = RoundWinner.None;
         }
 
-        G.Instance.Scene.Load("Match_Level1");
+        G.Instance.Scene.Load("RoundSummary");
     }
     
     public void SetMatchBar(MatchBar bar) {
