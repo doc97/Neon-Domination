@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class RoundManager {
@@ -71,9 +72,9 @@ public class RoundManager {
             BlueScore = 0;
         }
 
-        SceneManager.LoadScene("Match_Level1");
+        G.Instance.Scene.Load("Match_Level1");
     }
-
+    
     public void SetMatchBar(MatchBar bar) {
         this.bar = bar;
     }

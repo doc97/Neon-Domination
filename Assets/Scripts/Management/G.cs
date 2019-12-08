@@ -10,6 +10,7 @@ public sealed class G {
 
     public PipelineManager Pipeline { get; }
     public RoundManager Round { get; }
+    public NDSceneManager Scene { get; set; } // set in GObject.Awake()
     #endregion
 
     static G() {}
