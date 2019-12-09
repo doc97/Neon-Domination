@@ -5,6 +5,7 @@ Neon Domination is a 2 vs 2 open-source game where team's objective is to captur
 ## Prerequisites
 
 [Download Unity Hub from here](https://unity3d.com/get-unity/download)
+
 Project was made with Unity 2019.2.10f [Get it from Unity Download archive](https://unity3d.com/get-unity/download/archive) 
 
 
