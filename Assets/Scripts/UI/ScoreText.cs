@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
+[RequireComponent(typeof(Animator))]
 public class ScoreText : MonoBehaviour {
 
     #region Fields
@@ -29,6 +30,7 @@ public class ScoreText : MonoBehaviour {
 
     private IEnumerator UpdateScore() {
         yield return new WaitForSeconds(2);
+        GetComponent<Animator>().enabled = true;
         GetComponent<TextMeshProUGUI>().text = "" + score;
     }
 }
