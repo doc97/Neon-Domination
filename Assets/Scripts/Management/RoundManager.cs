@@ -78,7 +78,7 @@ public class RoundManager {
             LastWinner = RoundWinner.None;
             G.Instance.Scene.Load("MatchResult");
         } else {
-            G.Instance.Scene.Load("RoundSummary");
+            G.Instance.Scene.Load("RoundResult");
         }
     }
     
