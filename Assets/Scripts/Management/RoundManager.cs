@@ -14,7 +14,9 @@ public class RoundManager {
         get => _points;
         private set {
             _points = Math.Min(Math.Max(value, -POINTS_TO_SCORE), POINTS_TO_SCORE);
-            bar.Points = _points;
+            if (bar != null) {
+                bar.Points = _points;
+            }
         }
     }
     private int _redScore;
@@ -22,7 +24,9 @@ public class RoundManager {
         get => _redScore;
         private set {
             _redScore = Math.Max(value, 0);
-            bar.RedScore = _redScore;
+            if (bar != null) {
+                bar.RedScore = _redScore;
+            }
         }
     }
     private int _blueScore;
@@ -30,7 +34,9 @@ public class RoundManager {
         get => _blueScore;
         private set {
             _blueScore = Math.Max(value, 0);
-            bar.BlueScore = _blueScore;
+            if (bar != null) {
+                bar.BlueScore = _blueScore;
+            }
         }
     }
 
