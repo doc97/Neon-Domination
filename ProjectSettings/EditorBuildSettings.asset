@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Match_Level1.unity
     guid: 93b9b658d4dd8ddc0859459399f1366c
   - enabled: 1
-    path: Assets/Scenes/RoundSummary.unity
+    path: Assets/Scenes/RoundResult.unity
     guid: c5e16047b3423d74eb3bb2761d309bbc
+  - enabled: 1
+    path: Assets/Scenes/MatchResult.unity
+    guid: aac3048a7ffc69249879bc7390f65a93
   m_configObjects: {}

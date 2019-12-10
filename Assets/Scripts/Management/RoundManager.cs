@@ -76,9 +76,10 @@ public class RoundManager {
             RedScore = 0;
             BlueScore = 0;
             LastWinner = RoundWinner.None;
+            G.Instance.Scene.Load("MatchResult");
+        } else {
+            G.Instance.Scene.Load("RoundSummary");
         }
-
-        G.Instance.Scene.Load("RoundSummary");
     }
     
     public void SetMatchBar(MatchBar bar) {
