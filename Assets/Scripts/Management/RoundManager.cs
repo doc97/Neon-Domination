@@ -54,7 +54,7 @@ public class RoundManager {
 
         if (Points == POINTS_TO_SCORE) {
             BlueScore++;
-            Restart();
+            EndRound();
         }
     }
 
@@ -64,22 +64,24 @@ public class RoundManager {
 
         if (Points == -POINTS_TO_SCORE) {
             RedScore++;
-            Restart();
+            EndRound();
         }
     }
 
-    private void Restart() {
+    private void EndRound() {
         Points = 0;
         
-        // Restart match (best of 3)
-        if (RedScore + BlueScore == 3) {
-            RedScore = 0;
-            BlueScore = 0;
-            LastWinner = RoundWinner.None;
+        if (RedScore == 2 || BlueScore == 2) {
             G.Instance.Scene.Load("MatchResult");
         } else {
             G.Instance.Scene.Load("RoundResult");
         }
+    }
+
+    public void Reset() {
+        RedScore = 0;
+        BlueScore = 0;
+        LastWinner = RoundWinner.None;
     }
     
     public void SetMatchBar(MatchBar bar) {

@@ -8,6 +8,7 @@ public class GotoSceneCallback : BehaviourCallback {
     #endregion
 
     public override void Call() {
+        G.Instance.Round.Reset(); // Move later into main menu
         G.Instance.Scene.Load(sceneName);
     }
 }
