@@ -21,7 +21,7 @@ public class RoundManager {
     public int RedScore {
         get => _redScore;
         private set {
-            _redScore++;
+            _redScore = Math.Max(value, 0);
             bar.RedScore = _redScore;
         }
     }
@@ -29,7 +29,7 @@ public class RoundManager {
     public int BlueScore {
         get => _blueScore;
         private set {
-            _blueScore++;
+            _blueScore = Math.Max(value, 0);
             bar.BlueScore = _blueScore;
         }
     }
