@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44659358, g: 0.49642974, b: 0.5748251, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -469,7 +469,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Made BY: \nAlexander: 3D visual artist\nDaniel: Programmer\nBrian: Programmer
-    \nRamon: UI Designer"
+    \nRamon: UI Designer\nBenjamin: SFx & Music"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 14a37fe40769c2b40a08f99db9a3ef68, type: 2}
@@ -514,7 +514,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 95
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -538,12 +538,12 @@ MonoBehaviour:
   m_margin: {x: 343.27985, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 200731304}
-    characterCount: 94
+    characterCount: 116
     spriteCount: 0
-    spaceCount: 14
-    wordCount: 13
+    spaceCount: 18
+    wordCount: 16
     linkCount: 0
-    lineCount: 5
+    lineCount: 6
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
