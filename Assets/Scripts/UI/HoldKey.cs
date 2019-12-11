@@ -14,6 +14,8 @@ public class HoldKey : MonoBehaviour {
     private BehaviourCallback callback;
     [SerializeField, Tooltip("Slider text")]
     private TextMeshProUGUI text;
+    [SerializeField, Tooltip("Whether to auto update text to be 'Hold <key>'")]
+    private bool autoText = true;
     [SerializeField, Tooltip("Text to display once done")]
     private string doneText;
 
@@ -32,7 +34,10 @@ public class HoldKey : MonoBehaviour {
                 callback?.Call();
             }
         });
-        text.text = "[Hold " + key + "]";
+
+        if (autoText) {
+            text.text = "[Hold " + key + "]";
+        }
     }
 
     private void Update() {
