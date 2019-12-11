@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -285,6 +285,16 @@ PrefabInstance:
       propertyPath: key
       value: 27
       objectReference: {fileID: 0}
+    - target: {fileID: 4625766551966009111, guid: 08588f936feff674d9361f73212d6557,
+        type: 3}
+      propertyPath: autoText
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625766551966009111, guid: 08588f936feff674d9361f73212d6557,
+        type: 3}
+      propertyPath: customText
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4625766551349496432, guid: 08588f936feff674d9361f73212d6557,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -418,7 +428,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1498105339}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -947,8 +957,8 @@ RectTransform:
   - {fileID: 737253205}
   - {fileID: 1621319867}
   - {fileID: 1518734045}
-  - {fileID: 136702720}
   - {fileID: 200731302}
+  - {fileID: 136702720}
   m_Father: {fileID: 22894904}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1093,6 +1103,11 @@ PrefabInstance:
         type: 3}
       propertyPath: autoText
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625766551966009111, guid: 08588f936feff674d9361f73212d6557,
+        type: 3}
+      propertyPath: customText
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4625766551349496432, guid: 08588f936feff674d9361f73212d6557,
         type: 3}
