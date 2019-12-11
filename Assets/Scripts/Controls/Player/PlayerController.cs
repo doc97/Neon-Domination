@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if (isOnFloor) {
+        if (Player.State.IsOff(Player.States.Falling)) {
             MovementScheme?.Update(transform);
         }
 
@@ -137,9 +137,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision col) {
-        if (col.gameObject.tag == "Floor") {
-            isOnFloor = true;
-        }
         bool isPlayer = col.gameObject.GetComponent<PlayerController>() != null;
         if (Player.State.IsOn(Player.States.Dashing) && isPlayer) {
             Push(col.gameObject);
@@ -158,15 +155,11 @@ public class PlayerController : MonoBehaviour {
             StartRestart();
         }
     }
-    private void OnCollisionExit(Collision col) {
-        if (col.gameObject.tag == "Floor") {
-            isOnFloor = false;
-        }
-    }
 
     private void CheckFalling() {
         bool isDashing = Player.State.IsOn(Player.States.Dashing);
-        if (isOnFloor || isDashing)  { Player.State.Off(Player.States.Falling); }
+        bool hitFloor = Physics.Raycast(transform.position, Vector3.down, 10, LayerMask.GetMask("Floor"));
+        if (hitFloor || isDashing)   { Player.State.Off(Player.States.Falling); }
         else                         { Player.State.On(Player.States.Falling); }
 
         if (Player.HasOrb && Player.State == Player.States.Falling) {
