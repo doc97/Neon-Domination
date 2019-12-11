@@ -11,12 +11,12 @@ public class Player {
     #region Fields
     public EnumBitField<States> State { get; } = new EnumBitField<States>();
     public Vector3 AimDirection { get; private set; } = new Vector3(0, 0, 1);
+    public PlayerController Controller { get; private set; }
     public bool HasOrb { get => orb != null; }
 
     private Ability[] abilities;
     private InputBindings bindings;
 
-    private PlayerController controller;
     private GameObject effect;
     private Orb orb;
 
@@ -31,7 +31,7 @@ public class Player {
         };
         effect = player.transform.Find("Effect").gameObject;
         effect.SetActive(false);
-        controller = player.GetComponent<PlayerController>();
+        Controller = player.GetComponent<PlayerController>();
         IsInitialized = true;
     }
 
@@ -66,7 +66,7 @@ public class Player {
     }
 
     private void UpdateDashing() {
-        Rigidbody body = controller.transform.GetComponent<Rigidbody>();
+        Rigidbody body = Controller.transform.GetComponent<Rigidbody>();
         bool isDashing = State.IsOn(States.Dashing);
 
         // Disable gravity while player is dashing
@@ -80,14 +80,14 @@ public class Player {
     public void PickupOrb(Orb orb) {
         effect.SetActive(true);
         this.orb = orb;
-        controller.OnOrbPickup();
+        Controller.OnOrbPickup();
     }
 
     public void DropOrb(Vector3? position) {
         effect.SetActive(false);
         orb?.Spawn(position);
         orb = null;
-        controller.OnOrbDrop();
+        Controller.OnOrbDrop();
     }
 
     public T GetAbility<T>() where T : Ability {
@@ -100,6 +100,6 @@ public class Player {
     }
 
     public bool IsBlue() {
-        return controller.IsBlue();
+        return Controller.IsBlue();
     }
 }
