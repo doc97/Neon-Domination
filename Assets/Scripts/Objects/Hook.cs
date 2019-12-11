@@ -8,6 +8,10 @@ public class Hook : MonoBehaviour {
     [SerializeField]
     private Material redMaterial;
     [SerializeField]
+    private AudioClip activateSfx;
+    [SerializeField]
+    private AudioClip hitSfx;
+    [SerializeField]
     private float speed = 1;
 
     private Rigidbody body;
@@ -23,6 +27,9 @@ public class Hook : MonoBehaviour {
     private void Awake() {
         body = GetComponent<Rigidbody>();
         rope = transform.Find("Rope");
+
+        GetComponent<AudioSource>().clip = activateSfx;
+        GetComponent<AudioSource>().Play();
     }
 
     private void Update() {
@@ -42,6 +49,9 @@ public class Hook : MonoBehaviour {
             hooked.State.On(Player.States.Hooked);
             cancel.Abort();
             reverse = true;
+
+            GetComponent<AudioSource>().clip = hitSfx;
+            GetComponent<AudioSource>().Play();
         } else {
             Destroy();
         }
