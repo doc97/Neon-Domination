@@ -15,6 +15,6 @@ public class MatchResultText : MonoBehaviour {
         bool blueWon = G.Instance.Round.LastWinner == RoundManager.RoundWinner.Blue;
         string team = blueWon ? "Blue" : "Red";
         GetComponent<TextMeshProUGUI>().text = team + " team wins!";
-        GetComponent<TextMeshProUGUI>().material = blueWon ? blueMaterial : redMaterial;
+        GetComponent<TextMeshProUGUI>().fontMaterial = blueWon ? blueMaterial : redMaterial;
     }
 }
