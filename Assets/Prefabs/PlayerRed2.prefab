@@ -7,16 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4909878865204105815, guid: d92eae0ca1b69d2489b207e4405186e7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4909878865204105815, guid: d92eae0ca1b69d2489b207e4405186e7,
-        type: 3}
-      propertyPath: m_Name
-      value: Effect
-      objectReference: {fileID: 0}
     - target: {fileID: 5037309273628767111, guid: d92eae0ca1b69d2489b207e4405186e7,
         type: 3}
       propertyPath: m_Name
@@ -97,5 +87,20 @@ PrefabInstance:
       propertyPath: dashBinding
       value: Dash4
       objectReference: {fileID: 0}
+    - target: {fileID: 4909878865204105815, guid: d92eae0ca1b69d2489b207e4405186e7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909878865204105815, guid: d92eae0ca1b69d2489b207e4405186e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 640795875810795343, guid: d92eae0ca1b69d2489b207e4405186e7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d5f011d48a290049a81d220a0c99419, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92eae0ca1b69d2489b207e4405186e7, type: 3}

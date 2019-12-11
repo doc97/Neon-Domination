@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 8666294830442041667, guid: 217e32e711b487245b5cf9b6a5700cfa,
         type: 3}
       propertyPath: m_Name
-      value: Player2
+      value: PlayerBlue2
       objectReference: {fileID: 0}
     - target: {fileID: 8666294830442041666, guid: 217e32e711b487245b5cf9b6a5700cfa,
         type: 3}
@@ -52,5 +52,10 @@ PrefabInstance:
       propertyPath: dashBinding
       value: Dash2
       objectReference: {fileID: 0}
+    - target: {fileID: 6484268312030475187, guid: 217e32e711b487245b5cf9b6a5700cfa,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d5f011d48a290049a81d220a0c99419, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 217e32e711b487245b5cf9b6a5700cfa, type: 3}
