@@ -32,6 +32,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 508625177534212587, guid: 217e32e711b487245b5cf9b6a5700cfa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8666294830442041694, guid: 217e32e711b487245b5cf9b6a5700cfa,
         type: 3}
       propertyPath: horizontalBinding
@@ -51,11 +56,6 @@ PrefabInstance:
         type: 3}
       propertyPath: dashBinding
       value: Dash1
-      objectReference: {fileID: 0}
-    - target: {fileID: 508625177534212587, guid: 217e32e711b487245b5cf9b6a5700cfa,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6484268312030475187, guid: 217e32e711b487245b5cf9b6a5700cfa,
         type: 3}

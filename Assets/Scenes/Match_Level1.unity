@@ -2096,7 +2096,7 @@ PrefabInstance:
     - target: {fileID: 8802462474535388697, guid: e3bda13ae31d4e042ae026e29dd9584c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 30
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8802462474535388697, guid: e3bda13ae31d4e042ae026e29dd9584c,
         type: 3}
@@ -2171,12 +2171,12 @@ PrefabInstance:
     - target: {fileID: 8802462474535388702, guid: e3bda13ae31d4e042ae026e29dd9584c,
         type: 3}
       propertyPath: far clip plane
-      value: 100
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8802462474535388702, guid: e3bda13ae31d4e042ae026e29dd9584c,
         type: 3}
       propertyPath: field of view
-      value: 90
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8802462474535388702, guid: e3bda13ae31d4e042ae026e29dd9584c,
         type: 3}
@@ -2254,6 +2254,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBlue1
       objectReference: {fileID: 0}
+    - target: {fileID: 6180811740375923097, guid: 98c442f040c82cd46a09eeddeba0f5cc,
+        type: 3}
+      propertyPath: matchBarObject
+      value: 
+      objectReference: {fileID: 592100186}
+    - target: {fileID: 6180811740375923097, guid: 98c442f040c82cd46a09eeddeba0f5cc,
+        type: 3}
+      propertyPath: RespawnDelay
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180811740375923097, guid: 98c442f040c82cd46a09eeddeba0f5cc,
+        type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 610034127}
     - target: {fileID: 6180811740375923077, guid: 98c442f040c82cd46a09eeddeba0f5cc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2309,21 +2324,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6180811740375923097, guid: 98c442f040c82cd46a09eeddeba0f5cc,
-        type: 3}
-      propertyPath: matchBarObject
-      value: 
-      objectReference: {fileID: 592100186}
-    - target: {fileID: 6180811740375923097, guid: 98c442f040c82cd46a09eeddeba0f5cc,
-        type: 3}
-      propertyPath: RespawnDelay
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6180811740375923097, guid: 98c442f040c82cd46a09eeddeba0f5cc,
-        type: 3}
-      propertyPath: settings
-      value: 
-      objectReference: {fileID: 610034127}
     - target: {fileID: 7256211213627608908, guid: 98c442f040c82cd46a09eeddeba0f5cc,
         type: 3}
       propertyPath: m_Materials.Array.size

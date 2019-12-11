@@ -156,10 +156,21 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    private void OnTriggerEnter(Collider collider) {
+        if (collider.gameObject.tag == "Floor") {
+            isOnFloor = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider collider) {
+        if (collider.gameObject.tag == "Floor") {
+            isOnFloor = false;
+        }
+    }
+
     private void CheckFalling() {
         bool isDashing = Player.State.IsOn(Player.States.Dashing);
-        bool hitFloor = Physics.Raycast(transform.position, Vector3.down, 10, LayerMask.GetMask("Floor"));
-        if (hitFloor || isDashing)   { Player.State.Off(Player.States.Falling); }
+        if (isOnFloor || isDashing)  { Player.State.Off(Player.States.Falling); }
         else                         { Player.State.On(Player.States.Falling); }
 
         if (Player.HasOrb && Player.State == Player.States.Falling) {
