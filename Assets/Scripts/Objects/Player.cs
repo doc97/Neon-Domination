@@ -19,6 +19,8 @@ public class Player {
     private PlayerController controller;
     private GameObject effect;
     private Orb orb;
+
+    public bool IsInitialized { get; private set; }
     #endregion
 
     public void Initialize(GameObject player, GameObject hookPrefab, InputBindings bindings, MovementSettings movementSettings, GameplaySettings gameplaySettings) {
@@ -30,6 +32,7 @@ public class Player {
         effect = player.transform.Find("Effect").gameObject;
         effect.SetActive(false);
         controller = player.GetComponent<PlayerController>();
+        IsInitialized = true;
     }
 
     public void Update(float deltaTime) {
