@@ -4,8 +4,17 @@ using UnityEngine;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class MatchResultText : MonoBehaviour {
 
+    #region Fields
+    [SerializeField]
+    private Material redMaterial;
+    [SerializeField]
+    private Material blueMaterial;
+    #endregion
+
     private void Awake() {
-        string team = G.Instance.Round.LastWinner == RoundManager.RoundWinner.Blue ? "Blue" : "Red";
+        bool blueWon = G.Instance.Round.LastWinner == RoundManager.RoundWinner.Blue;
+        string team = blueWon ? "Blue" : "Red";
         GetComponent<TextMeshProUGUI>().text = team + " team wins!";
+        GetComponent<TextMeshProUGUI>().material = blueWon ? blueMaterial : redMaterial;
     }
 }

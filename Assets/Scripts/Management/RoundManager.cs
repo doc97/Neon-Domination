@@ -77,6 +77,7 @@ public class RoundManager {
     private void EndRound() {
         Points = 0;
         
+        Logger.Logf("Red: {0} | Blue: {1}", RedScore, BlueScore);
         if (RedScore == 2 || BlueScore == 2) {
             G.Instance.Scene.Load("MatchResult");
         } else {
