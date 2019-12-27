@@ -29,12 +29,12 @@ Project was made with Unity 2019.2.10f [Get it from Unity Download archive](http
 
 ## Credits 
 
-Daniel Riissanen. [doc97](https://github.com/doc97)
+Daniel Riissanen: [doc97](https://github.com/doc97)
 
-Alexander Streng. [Aka warriormaster](https://github.com/warriormaster12) & [Artstation page](https://www.artstation.com/alexstreng)
+Alexander Streng: [Aka warriormaster](https://github.com/warriormaster12) & [Artstation page](https://www.artstation.com/alexstreng)
 
 Brian Esel 
 
-Benjamin Berts. [Youtube channel](https://www.youtube.com/channel/UC2MXS3471odDHXzZkl63pLw) & [Audiotool page](https://www.audiotool.com/user/dj-z3ph1)
+Benjamin Berts: [Youtube channel](https://www.youtube.com/channel/UC2MXS3471odDHXzZkl63pLw) & [Audiotool page](https://www.audiotool.com/user/dj-z3ph1)
 
-Ramon Vanker. [Twitter page](https://twitter.com/BroSkemp?s=20)
+Ramon Vanker: [Twitter page](https://twitter.com/BroSkemp?s=20)
